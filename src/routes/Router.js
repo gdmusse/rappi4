@@ -7,6 +7,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import RestaurantPage from "../pages/RestaurantPage/RestaurantPage";
+import AddressPage from "../pages/AddressPage/AddressPage";
 
 const Router = () => {
   return (
@@ -17,6 +18,9 @@ const Router = () => {
         </Route>
         <Route exact path="/signup">
           <SignUpPage />
+        </Route>
+        <Route exact path="/address">
+          <AddressPage />
         </Route>
         <Route exact path="/profile">
           <ProfilePage />
