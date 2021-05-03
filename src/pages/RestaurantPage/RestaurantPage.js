@@ -2,17 +2,17 @@ import React from "react"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BASE_URL from "../../constants/urls";
-import { ChevronLeftIconStyled } from "./styled";
-import RestaurantCard from "../../components/RestaurantCard.js/ProductCard";
 import * as S from '../../pages/RestaurantPage/styled'
 import ProductCard from "../../components/RestaurantCard.js/ProductCard";
+import RestaurantCardDetails from "../../components/RestaurantCard.js/RestaurantCardDetails";
 
  const RestaurantPage = (props) =>  {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
 
   // const params = useParams();
-
   // const history = useHistory();
+const paramsId = 5
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFsVXBDWDRLIiwibmFtZSI6ImFkbWluZGV2IiwiZW1haWwiOiJhZG1pbmRldkBnLmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDA1OTk0MH0.4fTfTkUtSy6ty-3_UMziJmlus4CtFDRVFx-xy3GO2J4"
 
   useEffect(() => {
     getRestaurantDetails();
@@ -20,9 +20,9 @@ import ProductCard from "../../components/RestaurantCard.js/ProductCard";
 
   const getRestaurantDetails = () => {
     axios
-      .get(`${BASE_URL}/restaurants/1`, {
+      .get(`${BASE_URL}/restaurants/${paramsId}`, {
         headers: {
-          auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFsVXBDWDRLIiwibmFtZSI6ImFkbWluZGV2IiwiZW1haWwiOiJhZG1pbmRldkBnLmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDA1OTk0MH0.4fTfTkUtSy6ty-3_UMziJmlus4CtFDRVFx-xy3GO2J4",
+          auth:token,
         },
       })
       .then((response) => {
@@ -37,7 +37,7 @@ import ProductCard from "../../components/RestaurantCard.js/ProductCard";
   return (
 
     <S.Container>
-      <RestaurantCard
+      <RestaurantCardDetails
         logoUrl={restaurantDetails.logoUrl}
         name={restaurantDetails.name}
         deliveryTime={restaurantDetails.deliveryTime}
@@ -47,23 +47,7 @@ import ProductCard from "../../components/RestaurantCard.js/ProductCard";
       />
    
 
-      <ChevronLeftIconStyled  />
-      <S.RestaurantDetails>
-        <S.AreaLogoRest>
-          <S.ImageLogo src={restaurantDetails.logoUrl} />
-        </S.AreaLogoRest>
-        <S.RestaurantTitle> {restaurantDetails.name} </S.RestaurantTitle>
-        <S.Burger> {restaurantDetails.category} </S.Burger>
-        <S.Areatempo>
-          <S.TempoDeEntrega>
-            {restaurantDetails.deliveryTime}minutos
-          </S.TempoDeEntrega>
-          <S.Frete>Frete: {restaurantDetails.shipping} reais</S.Frete>
-        </S.Areatempo>
-        <S.Endereco>{restaurantDetails.address}</S.Endereco>
-      </S.RestaurantDetails>
-      <S.Principais>Principais</S.Principais>
-      <hr />
+     
 
       {restaurantDetails &&
         restaurantDetails.products &&
@@ -89,23 +73,3 @@ import ProductCard from "../../components/RestaurantCard.js/ProductCard";
 
 export default RestaurantPage
 
-
-// <S.Container>
-      
-// <ChevronLeftIconStyled  />
-// <S.RestaurantDetails>
-//   <S.AreaLogoRest>
-//     <S.ImageLogo src={restaurantDetails.logoUrl} />
-//   </S.AreaLogoRest>
-//   <S.RestaurantTitle> {restaurantDetails.name} </S.RestaurantTitle>
-//   <S.Burger> {restaurantDetails.category} </S.Burger>
-//   <S.Areatempo>
-//     <S.TempoDeEntrega>
-//       {restaurantDetails.deliveryTime}minutos
-//     </S.TempoDeEntrega>
-//     <S.Frete>Frete: {restaurantDetails.shipping} reais</S.Frete>
-//   </S.Areatempo>
-//   <S.Endereco>{restaurantDetails.address}</S.Endereco>
-// </S.RestaurantDetails>
-// <S.Principais>Principais</S.Principais>
-// <hr />

@@ -1,13 +1,8 @@
 import React from 'react'
 import * as S from '../../pages/RestaurantPage/styled'
-import styled from 'styled-components'
-
-
-
 
 function ProductCard(props) {
         
-    // console.log(props.Photo)
     return (
         
         <div>
