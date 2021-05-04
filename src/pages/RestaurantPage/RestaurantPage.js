@@ -5,15 +5,14 @@ import BASE_URL from "../../constants/urls";
 import * as S from '../../pages/RestaurantPage/styled'
 import ProductCard from "../../components/RestaurantCard.js/ProductCard";
 import RestaurantCardDetails from "../../components/RestaurantCard.js/RestaurantCardDetails";
-import { useParams } from "react-router-dom";
 
  const RestaurantPage = (props) =>  {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
 
-
+  // const params = useParams();
+  // const history = useHistory();
+const paramsId = 5
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFsVXBDWDRLIiwibmFtZSI6ImFkbWluZGV2IiwiZW1haWwiOiJhZG1pbmRldkBnLmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDA1OTk0MH0.4fTfTkUtSy6ty-3_UMziJmlus4CtFDRVFx-xy3GO2J4"
-const params = useParams()
-
 
   useEffect(() => {
     getRestaurantDetails();
@@ -21,7 +20,7 @@ const params = useParams()
 
   const getRestaurantDetails = () => {
     axios
-      .get(`${BASE_URL}/restaurants/${params.id}`, {
+      .get(`${BASE_URL}/restaurants/${paramsId}`, {
         headers: {
           auth:token,
         },
