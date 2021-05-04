@@ -8,6 +8,8 @@ const GlobalState = (props) => {
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState("");
   const [restaurants, setRestaurants] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   return (
     <GlobalStateContext.Provider
@@ -23,6 +25,10 @@ const GlobalState = (props) => {
         setLoading,
         restaurants,
         setRestaurants,
+        categories,
+        setCategories,
+        selectedCategory,
+        setSelectedCategory
       }}
     >
       {props.children}
