@@ -11,9 +11,11 @@ import { CollectionsBookmarkRounded } from "@material-ui/icons";
 import styled from "styled-components";
 
 const DivCards = styled.div`
-margin: 20px;
-`
+  margin: 20px;
+`;
 const HomePage = () => {
+  useProtectedPage();
+
   const {
     setAlertMsg,
     setAlertSeverity,
@@ -28,8 +30,7 @@ const HomePage = () => {
     axios
       .get(`${BASE_URL}/restaurants`, {
         headers: {
-          auth:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFsVXBDWDRLIiwibmFtZSI6ImFkbWluZGV2IiwiZW1haWwiOiJhZG1pbmRldkBnLmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDA1OTk0MH0.4fTfTkUtSy6ty-3_UMziJmlus4CtFDRVFx-xy3GO2J4",
+          auth: localStorage.getItem("token"),
         },
       })
       .then((res) => {
@@ -44,8 +45,14 @@ const HomePage = () => {
     getRestaurants();
   }, []);
 
+  const restaurantsCategories = restaurants
+    .map((restaurant) => {
+      return restaurant.category;
+    })
+    .filter((category, index, self) => {
+      return self.indexOf(category) === index;
+    });
   const restaurantsCards = restaurants.map((restaurant) => {
-    console.log("logourl", restaurant.logoUrl)
     return (
       <RestaurantCard
         key={restaurant.id}
@@ -54,13 +61,16 @@ const HomePage = () => {
         deliveryTime={restaurant.deliveryTime}
         shipping={restaurant.shipping}
       />
-   
     );
   });
 
-  return <div> 
-    <DivCards>{restaurantsCards}</DivCards>
-    </div>;
+  return (
+    <div>
+      {restaurantsCategories}
+
+      <DivCards>{restaurantsCards}</DivCards>
+    </div>
+  );
 };
 
 export default HomePage;

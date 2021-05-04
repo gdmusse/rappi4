@@ -45,7 +45,7 @@ const LoginPage = () => {
       }
     }
 
-    axios.post(`${BASE_URL}login`, form, axiosConfig).then(response => {
+    axios.post(`${BASE_URL}/login`, form, axiosConfig).then(response => {
       localStorage.setItem('token', response.data.token)
       goToHomePage(history)
     }).catch(error => {
