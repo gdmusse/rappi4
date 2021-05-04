@@ -9,6 +9,8 @@ import { useHistory } from "react-router-dom";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import styled from "styled-components";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
+import Loader from "../../components/Loader"
+
 const FullScreen = styled.div`
   width: 100%;
   height: 100%;
@@ -40,14 +42,13 @@ const HomePage = () => {
   useProtectedPage();
 
   const {
-    /*     setAlertMsg,
-    setAlertSeverity,
-    setOpenAlert, */
     setRestaurants,
     restaurants,
     setCategories,
     selectedCategory,
     categories,
+    loading,
+    setLoading
   } = useContext(GlobalStateContext);
 
   const [search, setSearch] = useInput("");
@@ -55,6 +56,7 @@ const HomePage = () => {
   const history = useHistory();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${BASE_URL}/restaurants`, {
         headers: {
@@ -63,10 +65,14 @@ const HomePage = () => {
       })
       .then((res) => {
         setRestaurants(res.data.restaurants);
+      
       })
       .catch((err) => {
         console.log(err.message);
-      });
+      })
+      .then(()=>{
+        setLoading(false);
+     });
   }, []);
 
   const restaurantsCategories = restaurants
@@ -75,7 +81,13 @@ const HomePage = () => {
     })
     .filter((category, index, self) => {
       return self.indexOf(category) === index;
-    });
+    })
+    .sort((a,b) => {
+      const nameA = a.toLowerCase();
+      const nameB = b.toLowerCase();
+      return nameA.localeCompare(nameB);
+    })
+    ;
 
   useEffect(() => {
     setCategories(restaurantsCategories);
@@ -117,8 +129,6 @@ const HomePage = () => {
     }
   });
 
-  console.log("filtered;", filteredRestaurants);
-
   return (
     <FullScreen>
       <DivInput>
@@ -136,8 +146,13 @@ const HomePage = () => {
       <DivCategories>
         <CategoryCard />
       </DivCategories>
-      <DivCards>{restaurantsCards}</DivCards>
-      {filteredRestaurants.length === 0 ? (
+      {loading ? <Loader/> : ""}
+      {loading === false && filteredRestaurants.length !== 0 ? (
+        <DivCards>{restaurantsCards}</DivCards>
+      ) : (
+        ""
+      )}
+      {loading === false && filteredRestaurants.length === 0 ? (
         <DivVazia>"Não encontramos :("</DivVazia>
       ) : (
         ""
