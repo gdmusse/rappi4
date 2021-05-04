@@ -14,35 +14,76 @@ import {
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import GlobalStateContext from "../../global/GlobalStateContext";
+import { primaryColor,   mainGray} from "../../constants/colors";
+
+const useStyles = makeStyles({});
+
+const StyledToggleButtonGroup = withStyles((theme) => ({
+  grouped: {
+    margin: theme.spacing(0.5),
+    border: "none",
+  },
+  
+}))(ToggleButtonGroup);
+
+const StyledToggleButton = withStyles((theme) => ({
+  root: {
+    height: 48,
+    "&:hover": {
+      color: primaryColor,
+      backgroundColor: "#fff",
+    },
+    "&.Mui-selected": {
+      color: primaryColor,
+      backgroundColor: "#fff",
+    },
+    "&.Mui-selected:hover": {
+      color: mainGray,
+      backgroundColor: "#fff",
+    }
+  },
+}))(ToggleButton);
 
 const CategoryCard = () => {
-  const {categories, setCategories, selectedCategory, setSelectedCategory} = useContext(GlobalStateContext);
-/* 
-  const useStyles = makeStyles({
-    button: {
-      "&.active": {
-        background:'black',
-      },
-    },
-  }); */
+  const {
+    categories,
+    setCategories,
+    selectedCategory,
+    setSelectedCategory,
+  } = useContext(GlobalStateContext);
+  const classes = useStyles();
 
-  console.log("selected:", selectedCategory)
+  console.log("selected:", selectedCategory);
   const handleChangeCategory = (event, newCategory) => {
-    if(newCategory !== selectedCategory) {
-        setSelectedCategory(newCategory);
+    if (newCategory !== selectedCategory) {
+      setSelectedCategory(newCategory);
     } else {
-        setSelectedCategory("")
+      setSelectedCategory("");
     }
   };
 
   const categoriesCards = categories.map((category) => {
-    return <ToggleButton key={category} value={category}>{category}</ToggleButton>;
+    return (
+      <StyledToggleButton
+        className={classes.button}
+        key={category}
+        value={category}
+        disableRipple
+      >
+        {category}
+      </StyledToggleButton>
+    );
   });
   return (
-    <ToggleButtonGroup value={selectedCategory} exclusive onChange={handleChangeCategory}>
+    <StyledToggleButtonGroup
+      value={selectedCategory}
+      exclusive
+      onChange={handleChangeCategory}
+      disableRipple 
+    >
       {categoriesCards}
-    </ToggleButtonGroup>
+    </StyledToggleButtonGroup>
   );
-}
+};
 
-export default CategoryCard
+export default CategoryCard;
