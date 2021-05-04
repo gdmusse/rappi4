@@ -45,10 +45,8 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFs
         category={restaurantDetails.category}
         address={restaurantDetails.address}
       />
-   
-
+    <S.MainTitleBar>Principais</S.MainTitleBar>
      
-
       {restaurantDetails &&
         restaurantDetails.products &&
         restaurantDetails.products.map((Item) => {

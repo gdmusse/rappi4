@@ -7,11 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { DivDetailsRestaurant, StyledCard }from "./styled"
+import { DivDetailsRestaurant, StyledCard, StyledCardContent, StyledTypographyTime }from "./styled"
 
 const useStyles = makeStyles({
   media: {
-    height: 150,
+    height: 130,
     width: "100%",
     
   },
@@ -24,21 +24,25 @@ export default function RestaurantCardDetails(props) {
   const classes = useStyles();
   const time2 = Number(props.deliveryTime) + 10;
   return (
-    <StyledCard
+    <Card
       style={{
         border: "none",
         boxShadow: "none",
+        borderRadius:" 12px 12px 0px 0px" ,
+        margin: "2%",
 
       }}
     >
       <CardActionArea>
         <CardMedia
+          className={classes.media}
           component="img"
           alt={props.name}
           image={props.logoUrl}
           title={props.name}
+          
         />
-        <CardContent>
+        <StyledCardContent >
           <Typography className={classes.title} gutterBottom variant="h5">
             {props.name}
           </Typography>
@@ -46,18 +50,16 @@ export default function RestaurantCardDetails(props) {
           <Typography variant="body2" color="textSecondary">
               {props.category} 
             </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {props.deliveryTime} - {time2} min
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              Frete R${props.shipping}
-            </Typography>
+            <StyledTypographyTime variant="body2" color="textSecondary">
+             <div>{props.deliveryTime} - {time2} min</div> <div> Frete R${props.shipping}</div>
+            </StyledTypographyTime>
+          
             <Typography variant="body2" color="textSecondary">
               {props.address}
             </Typography>
           </DivDetailsRestaurant>
-        </CardContent>
+        </StyledCardContent>
       </CardActionArea>
-    </StyledCard>
+    </Card>
   );
 }

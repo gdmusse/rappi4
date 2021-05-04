@@ -3,42 +3,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 640px;
-  width: 360px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
+  width: clamp(340px, 92vw, 1024px);
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
   border: 1px solid black;
-  overflow-y: auto;
+`;
+
+export const MainTitleBar = styled.div`
+  border-bottom: 1px solid black;
+  margin:3%;
+  padding-bottom:2%;
 `;
 
 
-export const AreaLogoRest = styled.div`
-display:flex;
-align-items:center;
-margin-left:105px;
-`;
-
-export const ImageLogo = styled.img`
-  width: 150px;
-  height: 150px;
-
-`;
-export const RestaurantTitle = styled.div`
-  width: 328px;
-  height: 18px;
-  margin: 12px 16px 8px;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.39px;
-  color: #e86e5a;
-`;
 export const Burger = styled.div`
   width: 104px;
   height: 18px;
@@ -131,15 +109,13 @@ export const ImgBurguer = styled.img`
 
 export const AreaImg = styled.div`
   display: flex;
-
 `;
 
 export const CardImgComida = styled.img`
-  width:100px;
-  height:100px;
-  margin-left:10px;
-
-`
+  width: 100px;
+  height: 100px;
+  margin-left: 10px;
+`;
 
 export const AreaItensLanche = styled.div`
   display: flex;
