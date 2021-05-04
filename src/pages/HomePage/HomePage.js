@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import useInput from "../../hooks/useInput";
 import TextField from "@material-ui/core/TextField";
 import BASE_URL from "../../constants/urls";
@@ -7,7 +7,6 @@ import axios from "axios";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useHistory } from "react-router-dom";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
-import { CollectionsBookmarkRounded } from "@material-ui/icons";
 import styled from "styled-components";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 const FullScreen = styled.div`
@@ -25,20 +24,33 @@ const DivCategories = styled.div`
   overflow: auto;
 `;
 
+const DivInput = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 20px;
+`;
+
+const DivVazia = styled.div`
+  text-align: center;
+  color: grey;
+  margin-top: 50px;
+`;
+
 const HomePage = () => {
   useProtectedPage();
 
   const {
-    setAlertMsg,
+    /*     setAlertMsg,
     setAlertSeverity,
-    setOpenAlert,
+    setOpenAlert, */
     setRestaurants,
     restaurants,
-    categories,
     setCategories,
     selectedCategory,
-    setSelectedCategory,
+    categories,
   } = useContext(GlobalStateContext);
+
+  const [search, setSearch] = useInput("");
 
   const history = useHistory();
 
@@ -65,7 +77,20 @@ const HomePage = () => {
       return self.indexOf(category) === index;
     });
 
-  const restaurantsCards = restaurants.map((restaurant) => {
+  useEffect(() => {
+    setCategories(restaurantsCategories);
+  }, [restaurants]);
+
+  const filteredRestaurants = restaurants.filter((restaurant) => {
+    const restaurantName = restaurant.name.toLowerCase();
+    if (restaurantName.includes(search.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  const restaurantsCards = filteredRestaurants.map((restaurant) => {
     if (selectedCategory === "" || selectedCategory === null) {
       return (
         <RestaurantCard
@@ -92,16 +117,31 @@ const HomePage = () => {
     }
   });
 
-  useEffect(() => {
-    setCategories(restaurantsCategories);
-  }, [restaurantsCategories[0]]);
+  console.log("filtered;", filteredRestaurants);
 
   return (
     <FullScreen>
+      <DivInput>
+        <TextField
+          name={"search"}
+          value={search}
+          onChange={setSearch}
+          variant={"outlined"}
+          label={"Restaurante"}
+          margin={"normal"}
+          fullWidth
+        />
+      </DivInput>
+
       <DivCategories>
         <CategoryCard />
       </DivCategories>
       <DivCards>{restaurantsCards}</DivCards>
+      {filteredRestaurants.length === 0 ? (
+        <DivVazia>"Não encontramos :("</DivVazia>
+      ) : (
+        ""
+      )}
     </FullScreen>
   );
 };

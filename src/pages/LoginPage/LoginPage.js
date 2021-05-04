@@ -58,6 +58,7 @@ const LoginPage = () => {
       setAlertMsg(error.response.data.message)
       setAlertSeverity("error")
       setOpenAlert(true)
+      clear();
     })
   }
 
