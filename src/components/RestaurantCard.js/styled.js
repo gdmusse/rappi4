@@ -35,14 +35,14 @@ export const InfoItemFood = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 5%;
-  margin-top:10%;
+  padding-top:5%;
+  width:100%;
 
 `;
 export const ButtonAdd = styled.span`
   width: 70px;
   height: 10px;
-justify-content:end;
-
+  justify-content:end;
   align-items: flex-end;
   justify-self:flex-end;
   align-self:flex-end;

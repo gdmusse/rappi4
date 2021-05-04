@@ -35,7 +35,7 @@ function ProductCard(props) {
             </Typography>
         
         <ButtonAdd >
-          {!inTheCart ? "adicionar" : "remover"}
+          {inTheCart ? "adicionar" : "remover"}
         </ButtonAdd>
         </InfoItemFood>
       </StyledCard>
