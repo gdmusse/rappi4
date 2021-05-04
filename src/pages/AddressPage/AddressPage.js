@@ -1,5 +1,5 @@
 import useForm from '../../hooks/useForm'
-import { Button, TextField } from "@material-ui/core"
+import { Button, TextField, Typography } from "@material-ui/core"
 import BASE_URL from '../../constants/urls'
 import { useHistory } from 'react-router-dom'
 import { goToHomePage } from '../../routes/coordinator'
@@ -67,7 +67,7 @@ const AddressPage = () => {
 
     return (
         <ScreenContainer>
-
+            <Typography variant="h5">Sign Up</Typography>
             <InputsContainer>
                 <form onSubmit={onSubmitForm}>
                     <TextField

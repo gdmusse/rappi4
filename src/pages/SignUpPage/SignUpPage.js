@@ -1,13 +1,20 @@
 import useForm from '../../hooks/useForm'
-import { Button, TextField } from "@material-ui/core"
+import { Button, TextField, Typography, InputAdornment, IconButton } from "@material-ui/core"
 import BASE_URL from '../../constants/urls'
 import { useHistory } from 'react-router-dom'
 import { goToAddressPage } from '../../routes/coordinator'
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import logo from '../../assets/images/logo-future-eats-invert.svg'
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 
+export const LogoImage = styled.img`
+  width: 40vw;
+  max-width: 250px;
+`
 
 export const ScreenContainer = styled.div`
   display: flex;
@@ -50,9 +57,15 @@ const SignUpPage = () => {
     })
   }
 
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => { setShowPassword(!showPassword) }
+  const handleMouseDownPassword = () => { setShowPassword(!showPassword) }
+
   return (
     <ScreenContainer>
-
+      <LogoImage src={logo} />
+      <Typography variant="h5">Sign Up</Typography>
       <InputsContainer>
         <form onSubmit={onSubmitForm}>
           <TextField
@@ -97,16 +110,28 @@ const SignUpPage = () => {
             fullWidth
             margin={"normal"}
             required
-            type={"password"}
+            type={showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment:
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+
+            }}
           />
           <Button
-
             type={"submit"}
             variant={"contained"}
             color={"primary"}
             fullWidth
             margin={"normal"}>
-            Sign Up
+            Next
                     </Button>
 
         </form>
