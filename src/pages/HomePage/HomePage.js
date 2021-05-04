@@ -56,7 +56,6 @@ const HomePage = () => {
     return (
       <RestaurantCard
         key={restaurant.id}
-        id={restaurant.id}
         logoUrl={restaurant.logoUrl}
         name={restaurant.name}
         deliveryTime={restaurant.deliveryTime}

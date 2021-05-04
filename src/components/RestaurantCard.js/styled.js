@@ -29,7 +29,6 @@ border:solid 1px ${mainGray};
 
 export const CardImgFood = styled.img`
   width: 100px;
-  
 `;
 
 export const InfoItemFood = styled.div`

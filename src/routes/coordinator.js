@@ -18,7 +18,7 @@ export const goToCartPage = (history) => {
 };
 
 export const goToRestaurantPage = (history, id) => {
-  history.push(`/restaurant/${id}`);
+  history.push("/restaurant");
 };
 
 export const goToPreviousPage = (history) => {
