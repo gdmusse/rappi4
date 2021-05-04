@@ -28,15 +28,8 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
 const StyledToggleButton = withStyles((theme) => ({
   root: {
     height: 48,
-    "&:hover": {
-      color: primaryColor,
-      backgroundColor: "#fff",
-    },
     "&.Mui-selected": {
       color: primaryColor,
-      backgroundColor: "#fff",
-    },
-    "&.Mui-selected:hover": {
       backgroundColor: "#fff",
     },
   },
