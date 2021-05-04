@@ -17,6 +17,10 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
 const StyledToggleButton = withStyles((theme) => ({
   root: {
     height: 48,
+    marginRight: 20,
+    "&:last-child": {
+      marginRight: 0,
+    },
     "&.Mui-selected": {
       color: primaryColor,
       backgroundColor: "#fff",
