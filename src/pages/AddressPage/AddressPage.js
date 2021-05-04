@@ -46,8 +46,7 @@ const AddressPage = () => {
                 auth: localStorage.getItem('token')
             }
         }
-        console.log(form)
-        axios.put(`${BASE_URL}address`, form, axiosConfig).then(response => {
+        axios.put(`${BASE_URL}/address`, form, axiosConfig).then(response => {
             localStorage.setItem('token', response.data.token)
             goToHomePage(history)
             clear()
