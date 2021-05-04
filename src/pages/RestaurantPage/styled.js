@@ -111,17 +111,6 @@ export const AreaImg = styled.div`
   display: flex;
 `;
 
-export const CardImgComida = styled.img`
-  width: 100px;
-  height: 100px;
-  margin-left: 10px;
-`;
-
-export const AreaItensLanche = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 30px;
-`;
 
 export const NomeDoItem = styled.p`
   width: 166px;
@@ -165,61 +154,6 @@ export const Preco = styled.p`
   color: var(--black);
 `;
 
-export const ButtonAdd = styled.span`
-  width: 40px;
-  height: 5px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 0 auto;
-  padding: 8px 20.5px 9px 21.5px;
-  color: red;
-  cursor: pointer;
-  border-radius: 8px;
-  border: solid 1px;
-`;
-
-export const Adicionar = styled.div`
-  width: 48px;
-  height: 14px;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.29px;
-  text-align: center;
-  color: red;
-`;
-
-export const ButtonAddR = styled.span`
-  width: 40px;
-  height: 5px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: -20px 0 0 100px;
-  padding: 8px 20.5px 9px 21.5px;
-  color: black;
-  cursor: pointer;
-  border-radius: 8px;
-  border: solid 1px;
-`;
-
-export const Remover = styled.div`
-  width: 48px;
-  height: 14px;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.29px;
-  text-align: center;
-  color: black;
-`;
 
 export const Acompanhamentos = styled.div`
   width: 328px;

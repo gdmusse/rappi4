@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from '../styled'
+import * as S from '../tyled'
 // import Dropdown from '../../Assets/dropdown.svg'
 
 
