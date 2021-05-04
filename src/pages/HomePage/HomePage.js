@@ -11,19 +11,20 @@ import { CollectionsBookmarkRounded } from "@material-ui/icons";
 import styled from "styled-components";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 const FullScreen = styled.div`
- width: 100%;
-    height: 100%;
-    overflow: hidden;
-`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
 const DivCards = styled.div`
   margin: 20px;
 `;
 
 const DivCategories = styled.div`
-      height: 100%;
-    width: 100%;
-    overflow: auto;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 `;
+
 const HomePage = () => {
   useProtectedPage();
 
@@ -81,6 +82,7 @@ const HomePage = () => {
       return (
         <RestaurantCard
           key={restaurant.id}
+          id={restaurant.id}
           logoUrl={restaurant.logoUrl}
           name={restaurant.name}
           deliveryTime={restaurant.deliveryTime}
@@ -94,17 +96,11 @@ const HomePage = () => {
     setCategories(restaurantsCategories);
   }, [restaurantsCategories[0]]);
 
-/*   console.log("rc", restaurantsCategories);
-
-  console.log("categories", categories);
- */
-
   return (
     <FullScreen>
       <DivCategories>
         <CategoryCard />
       </DivCategories>
-
       <DivCards>{restaurantsCards}</DivCards>
     </FullScreen>
   );
