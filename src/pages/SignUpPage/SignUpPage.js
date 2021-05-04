@@ -1,20 +1,25 @@
-import useForm from '../../hooks/useForm'
-import { Button, TextField, Typography, InputAdornment, IconButton } from "@material-ui/core"
-import BASE_URL from '../../constants/urls'
-import { useHistory } from 'react-router-dom'
-import { goToAddressPage } from '../../routes/coordinator'
-import axios from 'axios'
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import logo from '../../assets/images/logo-future-eats-invert.svg'
+import useForm from "../../hooks/useForm";
+import {
+  Button,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
+import BASE_URL from "../../constants/urls";
+import { useHistory } from "react-router-dom";
+import { goToAddressPage } from "../../routes/coordinator";
+import axios from "axios";
+import React, { useState } from "react";
+import styled from "styled-components";
+import logo from "../../assets/images/logo-future-eats-invert.svg";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
 
 export const LogoImage = styled.img`
   width: 40vw;
   max-width: 250px;
-`
+`;
 
 export const ScreenContainer = styled.div`
   display: flex;
@@ -22,7 +27,7 @@ export const ScreenContainer = styled.div`
   align-items: center;
   width: 100vw;
   margin-top: 10vh;
-`
+`;
 
 export const InputsContainer = styled.div`
   display: flex;
@@ -31,36 +36,47 @@ export const InputsContainer = styled.div`
   max-width: 450px;
   align-items: center;
   margin-bottom: 20px;
-`
+`;
 
 const SignUpPage = () => {
-  const history = useHistory()
-  const [form, onChange, clear] = useForm({ name: "", email: "", cpf: "", password: "" })
+  const history = useHistory();
+  const [form, onChange, clear] = useForm({
+    name: "",
+    email: "",
+    cpf: "",
+    password: "",
+  });
 
   const onSubmitForm = (event) => {
-    event.preventDefault()
-    signUp()
-  }
+    event.preventDefault();
+    signUp();
+  };
   const signUp = () => {
     const axiosConfig = {
       headers: {
-        auth: localStorage.getItem('token')
-      }
-    }
+        auth: localStorage.getItem("token"),
+      },
+    };
 
-    axios.post(`${BASE_URL}/signup`, form, axiosConfig).then(response => {
-      localStorage.setItem('token', response.data.token)
-      goToAddressPage(history)
-    }).catch(error => {
-      console.log(error)
-
-    })
-  }
-
+    axios
+      .post(`${BASE_URL}/signup`, form, axiosConfig)
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        goToAddressPage(history);
+      })
+      .catch((error) => {
+        console.log(error);
+        clear();
+      });
+  };
 
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => { setShowPassword(!showPassword) }
-  const handleMouseDownPassword = () => { setShowPassword(!showPassword) }
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleMouseDownPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <ScreenContainer>
@@ -112,7 +128,7 @@ const SignUpPage = () => {
             required
             type={showPassword ? "text" : "password"}
             InputProps={{
-              endAdornment:
+              endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
@@ -122,7 +138,7 @@ const SignUpPage = () => {
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
-
+              ),
             }}
           />
           <Button
@@ -130,16 +146,14 @@ const SignUpPage = () => {
             variant={"contained"}
             color={"primary"}
             fullWidth
-            margin={"normal"}>
+            margin={"normal"}
+          >
             Next
-                    </Button>
-
+          </Button>
         </form>
       </InputsContainer>
-
-
     </ScreenContainer>
   );
-}
+};
 
-export default SignUpPage
+export default SignUpPage;
