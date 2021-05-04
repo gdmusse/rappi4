@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { DivDetailsRestaurant, StyledCard, StyledCardContent, StyledTypographyTime }from "./styled"
+import { mainGray } from "../../constants/colors";
 
 const useStyles = makeStyles({
   media: {
@@ -26,7 +27,6 @@ export default function RestaurantCardDetails(props) {
   return (
     <Card
       style={{
-        border: "none",
         boxShadow: "none",
         borderRadius:" 12px 12px 0px 0px" ,
         margin: "2%",
