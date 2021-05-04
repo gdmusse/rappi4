@@ -14,7 +14,7 @@ import {
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { primaryColor,   mainGray} from "../../constants/colors";
+import { primaryColor, mainGray } from "../../constants/colors";
 
 const useStyles = makeStyles({});
 
@@ -23,7 +23,6 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
     margin: theme.spacing(0.5),
     border: "none",
   },
-  
 }))(ToggleButtonGroup);
 
 const StyledToggleButton = withStyles((theme) => ({
@@ -38,9 +37,8 @@ const StyledToggleButton = withStyles((theme) => ({
       backgroundColor: "#fff",
     },
     "&.Mui-selected:hover": {
-      color: mainGray,
       backgroundColor: "#fff",
-    }
+    },
   },
 }))(ToggleButton);
 
@@ -79,7 +77,7 @@ const CategoryCard = () => {
       value={selectedCategory}
       exclusive
       onChange={handleChangeCategory}
-      disableRipple 
+      disableRipple
     >
       {categoriesCards}
     </StyledToggleButtonGroup>
