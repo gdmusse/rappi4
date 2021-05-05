@@ -15,6 +15,8 @@ const GlobalState = (props) => {
   const [selectcart, setSelectcart] = useState(false);
   const [selectedItem, setSelectedItem] = useState();
   const [selectedItemRemove, setSelectedItemRemove] = useState(false);
+  const [actualPage, setActualPage] = useState("");
+  const [back, setBack] = useState(false);
   const [profile, setProfile] = useState({});
 
   const addItemToCart = (newItem) => {
@@ -69,6 +71,8 @@ const GlobalState = (props) => {
         selectedItem, setSelectedItem,
         removeItemFromCart,
         selectedItemRemove, setSelectedItemRemove,
+        actualPage, setActualPage,
+        back, setBack
         profile,
         setProfile
       }}
