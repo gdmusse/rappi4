@@ -9,6 +9,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import RestaurantPage from "../pages/RestaurantPage/RestaurantPage";
 import AddressPage from "../pages/AddressPage/AddressPage";
 import Header from "../components/Header";
+import EditAddressPage from "../pages/EditAddressPage/EditAddress"
+import EditProfilePage from "../pages/EditProfilePage/EditProfile"
 
 const Router = () => {
   return (
@@ -24,6 +26,14 @@ const Router = () => {
         <Route exact path="/address">
           <Header />
           <AddressPage />
+        </Route>
+        <Route exact path="/edit-profile">
+          <Header />
+          <EditProfilePage />
+        </Route>  
+        <Route exact path="/edit-address">
+          <Header />
+          <EditAddressPage />
         </Route>
         <Route exact path="/profile">
           <Header />
