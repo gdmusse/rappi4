@@ -21,8 +21,19 @@ export const goToRestaurantPage = (history, id) => {
   history.push(`/restaurant/${id}`);
 };
 
-
 export const goToPreviousPage = (history) => {
   history.goBack();
+};
+
+export const goToProfile = (history) => {
+  history.push("/profile");
+};
+
+export const goToEditAddress = (history) => {
+  history.push("/edit-address");
+};
+
+export const goToEditProfile = (history) => {
+  history.push("/edit-profile");
 };
 

@@ -15,6 +15,7 @@ const GlobalState = (props) => {
   const [selectcart, setSelectcart] = useState(false);
   const [selectedItem, setSelectedItem] = useState();
   const [selectedItemRemove, setSelectedItemRemove] = useState(false);
+  const [profile, setProfile] = useState({});
 
   const addItemToCart = (newItem) => {
     const index = cart.findIndex((i) => i.id === newItem.id);
@@ -68,6 +69,8 @@ const GlobalState = (props) => {
         selectedItem, setSelectedItem,
         removeItemFromCart,
         selectedItemRemove, setSelectedItemRemove,
+        profile,
+        setProfile
       }}
     >
       {props.children}
