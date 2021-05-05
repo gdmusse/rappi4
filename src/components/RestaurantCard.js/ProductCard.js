@@ -56,7 +56,7 @@ function ProductCard(props) {
         style={{
           boxShadow: "none",
           borderRadius: " 10px ",
-          margin: "5%",
+          margin: "2%",
         }}
       >
         <CardImgFood src={props.Photo} alt='comida' />

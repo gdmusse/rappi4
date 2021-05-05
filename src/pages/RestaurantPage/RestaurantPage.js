@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import BASE_URL from "../../constants/urls";
 import ProductCard from "../../components/RestaurantCard.js/ProductCard";
 import RestaurantCardDetails from "../../components/RestaurantCard.js/RestaurantCardDetails";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import CardSelector from "./SelectProductTocard";
 import { Container, MainTitleBar } from "./styled";
@@ -15,7 +15,7 @@ const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
 
   const params = useParams();
-  // const history = useHistory();
+  const history = useHistory();
 
   const {cart, selectcart, selectedItemRemove } = useContext(GlobalStateContext);
 
