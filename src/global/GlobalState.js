@@ -10,6 +10,7 @@ const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [profile, setProfile] = useState({});
 
   return (
     <GlobalStateContext.Provider
@@ -28,7 +29,9 @@ const GlobalState = (props) => {
         categories,
         setCategories,
         selectedCategory,
-        setSelectedCategory
+        setSelectedCategory,
+        profile,
+        setProfile
       }}
     >
       {props.children}
