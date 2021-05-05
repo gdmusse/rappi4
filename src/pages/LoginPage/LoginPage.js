@@ -12,6 +12,8 @@ import { useContext } from 'react'
 import logo from '../../assets/images/logo-future-eats-invert.svg'
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 export const LogoImage = styled.img`
   width: 40vw;
@@ -74,72 +76,78 @@ const LoginPage = () => {
   const handleClickShowPassword = () => { setShowPassword(!showPassword) }
   const handleMouseDownPassword = () => { setShowPassword(!showPassword) }
   return (
-    <ScreenContainer>
-      <LogoImage src={logo} />
-      <Typography variant="h5">Login</Typography>
-      <InputsContainer>
-        <form onSubmit={onSubmitForm}>
+    <>
+      <Header />
+      <ScreenContainer>
 
-          <TextField
-            name={"email"}
-            value={form.email}
-            onChange={onChange}
-            label={"Email"}
-            variant={"outlined"}
-            fullWidth
-            margin={"normal"}
-            required
-            type={"email"}
-          />
+        <LogoImage src={logo} />
+        <Typography variant="h5">Login</Typography>
+        <InputsContainer>
+          <form onSubmit={onSubmitForm}>
 
-          <TextField
-            name={"password"}
-            value={form.password}
-            onChange={onChange}
-            label={"Password"}
-            variant={"outlined"}
-            fullWidth
-            margin={"normal"}
-            required
-            type={showPassword ? "text" : "password"}
-            InputProps={{
-              endAdornment:
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
+            <TextField
+              name={"email"}
+              value={form.email}
+              onChange={onChange}
+              label={"Email"}
+              variant={"outlined"}
+              fullWidth
+              margin={"normal"}
+              required
+              type={"email"}
+            />
 
-            }}
-          />
-          <Button
-            type={"submit"}
-            variant={"contained"}
-            color={"primary"}
-            fullWidth
-            margin={"normal"}>
-            Login
+            <TextField
+              name={"password"}
+              value={form.password}
+              onChange={onChange}
+              label={"Password"}
+              variant={"outlined"}
+              fullWidth
+              margin={"normal"}
+              required
+              type={showPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment:
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+
+              }}
+            />
+            <Button
+              type={"submit"}
+              variant={"contained"}
+              color={"primary"}
+              fullWidth
+              margin={"normal"}>
+              Login
                     </Button>
-          <Button
-            onClick={() => goToSignUpPage(history)}
-            type={"submit"}
-            color={"primary"}
-            fullWidth
-            margin={"normal"}
-          >
-            Don't have an account? Sign Up
+            <Button
+              onClick={() => goToSignUpPage(history)}
+              type={"submit"}
+              color={"primary"}
+              fullWidth
+              margin={"normal"}
+            >
+              Don't have an account? Sign Up
                 </Button>
 
-        </form>
-      </InputsContainer>
-      <AlertModified />
+          </form>
+        </InputsContainer>
+        <AlertModified />
 
-    </ScreenContainer>
+      </ScreenContainer>
+
+    </>
   );
+
 }
 
 export default LoginPage
