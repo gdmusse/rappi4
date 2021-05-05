@@ -72,7 +72,7 @@ const GlobalState = (props) => {
         removeItemFromCart,
         selectedItemRemove, setSelectedItemRemove,
         actualPage, setActualPage,
-        back, setBack
+        back, setBack,
         profile,
         setProfile
       }}
