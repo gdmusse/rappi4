@@ -25,6 +25,7 @@ display:flex;
 flex-direction:row;
 border:solid 1px ${mainGray};
 
+
 `;
 
 export const CardImgFood = styled.img`

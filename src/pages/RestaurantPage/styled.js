@@ -2,11 +2,10 @@ import styled from "styled-components";
 import { primaryColor } from "../../constants/colors";
 
 export const Container = styled.div`
-  width: clamp(340px, 92vw, 1024px);
+  width: clamp(340px, 100vw, 900px);
   display: flex;
   flex-direction: column;
   justify-self: center;
-  border: 1px solid black;
 `;
 
 export const MainTitleBar = styled.div`
@@ -52,7 +51,7 @@ export const SelectionTitle = styled.div`
   justify-content: center;
 `;
 
-export const InputAdd = styled.input`
+export const InputAdd = styled.select`
   margin-left: 1rem;
   width: 210px;
   height: 25px;
