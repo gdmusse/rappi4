@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import useForm from "../../hooks/useForm";
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardSelector(props) {
-  const {setCartQuantity, addItemToCart, selectedItem, setSelectedItem, selectcart, setSelectcart} = useContext(GlobalStateContext);
+  const {setCartQuantity, addItemToCart, selectedItem, setSelectcart} = useContext(GlobalStateContext);
   const [form, onChange, clear] = useForm({ quantidade: "1" });
   
   const updateQuantity = () => {

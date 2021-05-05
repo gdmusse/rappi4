@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import styled from "styled-components";
 import { primaryColor } from "../../constants/colors";
 
@@ -68,3 +66,4 @@ export const InputAdd = styled.input`
     outline: 0;
   }
 `;
+

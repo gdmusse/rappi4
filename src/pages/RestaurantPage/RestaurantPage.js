@@ -8,6 +8,8 @@ import { useParams } from "react-router";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import CardSelector from "./SelectProductTocard";
 import { Container, MainTitleBar } from "./styled";
+import CardRemove from "./RemoveProducts";
+
 
 const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
@@ -15,7 +17,7 @@ const RestaurantPage = (props) => {
   const params = useParams();
   // const history = useHistory();
 
-  const {selectcart } = useContext(GlobalStateContext);
+  const {cart, selectcart, selectedItemRemove } = useContext(GlobalStateContext);
 
   useEffect(() => {
     getRestaurantDetails();
@@ -32,13 +34,16 @@ const RestaurantPage = (props) => {
         setRestaurantDetails(response.data.restaurant);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 
   const showPage = () => {
-    return selectcart ? <CardSelector></CardSelector> : null;
+    return selectcart ? (<CardSelector></CardSelector>) :
+       selectedItemRemove ? (<CardRemove></CardRemove>) : null;
   };
+  
+
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -59,7 +64,8 @@ const RestaurantPage = (props) => {
           restaurantDetails.products.map((Item) => {
             return (
               <ProductCard
-                resta={Item}
+              
+                prod={Item}
                 key={Item.id}
                 id={Item.id}
                 name={Item.name}

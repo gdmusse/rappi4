@@ -14,15 +14,17 @@ const GlobalState = (props) => {
   const [cartQuantity, setCartQuantity] = useState(0);
   const [selectcart, setSelectcart] = useState(false);
   const [selectedItem, setSelectedItem] = useState();
+  const [selectedItemRemove, setSelectedItemRemove] = useState(false);
 
   const addItemToCart = (newItem) => {
     const index = cart.findIndex((i) => i.id === newItem.id);
     let newCart = [...cart];
     if (index === -1) {
-      newCart.push({ ...newItem, quantity: cartQuantity });
+      newCart.push({ ...newItem, quantity: Number(cartQuantity) });
     } else {
-      newCart[index].amount += cartQuantity;
+      newCart[index].quantity += Number(cartQuantity);
     }
+    
     setCart(newCart);
     alert(`${newItem.name} foi adicionado ao seu carrinho!`);
   };
@@ -30,10 +32,10 @@ const GlobalState = (props) => {
   const removeItemFromCart = (itemToRemove) => {
     const index = cart.findIndex((i) => i.id === itemToRemove.id);
     let newCart = [...cart];
-    if (newCart[index].amount === 1) {
+    if (newCart[index].quantity > 0) {
       newCart.splice(index, 1);
     } else {
-      newCart[index].amount -= 1;
+      setSelectedItemRemove(false)
     }
     setCart(newCart);
   };
@@ -64,9 +66,8 @@ const GlobalState = (props) => {
         cartQuantity, setCartQuantity,
         selectcart, setSelectcart,
         selectedItem, setSelectedItem,
-
-
-
+        removeItemFromCart,
+        selectedItemRemove, setSelectedItemRemove,
       }}
     >
       {props.children}
