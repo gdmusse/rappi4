@@ -48,7 +48,9 @@ const HomePage = () => {
     selectedCategory,
     categories,
     loading,
-    setLoading
+    setLoading,
+    setActualPage,
+    setBack
   } = useContext(GlobalStateContext);
 
   const [search, setSearch] = useInput("");
@@ -56,6 +58,8 @@ const HomePage = () => {
   const history = useHistory();
 
   useEffect(() => {
+    setActualPage("Rappi4");
+    setBack(false);
     setLoading(true);
     axios
       .get(`${BASE_URL}/restaurants`, {

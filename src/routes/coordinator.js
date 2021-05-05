@@ -21,7 +21,6 @@ export const goToRestaurantPage = (history, id) => {
   history.push(`/restaurant/${id}`);
 };
 
-
 export const goToPreviousPage = (history) => {
   history.goBack();
 };

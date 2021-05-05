@@ -10,11 +10,13 @@ import BASE_URL from "../../constants/urls";
 import { useHistory } from "react-router-dom";
 import { goToAddressPage } from "../../routes/coordinator";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo-future-eats-invert.svg";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Box from "@material-ui/core/Box";
+import GlobalStateContext from "../../global/GlobalStateContext";
 
 export const LogoImage = styled.img`
   width: 40vw;
@@ -26,7 +28,7 @@ export const ScreenContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  margin-top: 10vh;
+  margin-top: 3vh;
 `;
 
 export const InputsContainer = styled.div`
@@ -46,6 +48,14 @@ const SignUpPage = () => {
     cpf: "",
     password: "",
   });
+
+  const {
+    setActualPage
+  } = useContext(GlobalStateContext);
+
+  useEffect(() => {
+    setActualPage("");
+  }, [])
 
   const onSubmitForm = (event) => {
     event.preventDefault();
@@ -81,14 +91,16 @@ const SignUpPage = () => {
   return (
     <ScreenContainer>
       <LogoImage src={logo} />
-      <Typography variant="h5">Sign Up</Typography>
+      <Box mt={2}>
+        <Typography variant="h5">Cadastrar</Typography>
+      </Box>
       <InputsContainer>
         <form onSubmit={onSubmitForm}>
           <TextField
             name={"name"}
             value={form.name}
             onChange={onChange}
-            label={"Name"}
+            label={"Nome"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -110,7 +122,7 @@ const SignUpPage = () => {
             name={"cpf"}
             value={form.cpf}
             onChange={onChange}
-            label={"Cpf"}
+            label={"CPF"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -121,7 +133,7 @@ const SignUpPage = () => {
             name={"password"}
             value={form.password}
             onChange={onChange}
-            label={"Password"}
+            label={"Senha"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -141,15 +153,17 @@ const SignUpPage = () => {
               ),
             }}
           />
-          <Button
-            type={"submit"}
-            variant={"contained"}
-            color={"primary"}
-            fullWidth
-            margin={"normal"}
-          >
-            Next
-          </Button>
+          <Box mt={2}>
+            <Button
+              type={"submit"}
+              variant={"contained"}
+              color={"primary"}
+              fullWidth
+              margin={"normal"}
+            >
+              Criar
+            </Button>
+          </Box>
         </form>
       </InputsContainer>
     </ScreenContainer>

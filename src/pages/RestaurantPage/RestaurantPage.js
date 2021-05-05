@@ -10,17 +10,24 @@ import CardSelector from "./SelectProductTocard";
 import { Container, MainTitleBar } from "./styled";
 import CardRemove from "./RemoveProducts";
 
-
 const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
 
   const params = useParams();
   const history = useHistory();
 
-  const {cart, selectcart, selectedItemRemove } = useContext(GlobalStateContext);
+  const {
+    cart,
+    selectcart,
+    selectedItemRemove,
+    setActualPage,
+    setBack,
+  } = useContext(GlobalStateContext);
 
   useEffect(() => {
     getRestaurantDetails();
+    setActualPage("Restaurante");
+    setBack(true);
   }, []);
 
   const getRestaurantDetails = () => {
@@ -39,11 +46,12 @@ const RestaurantPage = (props) => {
   };
 
   const showPage = () => {
-    return selectcart ? (<CardSelector></CardSelector>) :
-       selectedItemRemove ? (<CardRemove></CardRemove>) : null;
+    return selectcart ? (
+      <CardSelector></CardSelector>
+    ) : selectedItemRemove ? (
+      <CardRemove></CardRemove>
+    ) : null;
   };
-  
-
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -64,7 +72,6 @@ const RestaurantPage = (props) => {
           restaurantDetails.products.map((Item) => {
             return (
               <ProductCard
-              
                 prod={Item}
                 key={Item.id}
                 id={Item.id}
