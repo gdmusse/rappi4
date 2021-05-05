@@ -1,19 +1,21 @@
-import React from "react"
+import React, { useContext } from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BASE_URL from "../../constants/urls";
-import * as S from '../../pages/RestaurantPage/styled'
 import ProductCard from "../../components/RestaurantCard.js/ProductCard";
 import RestaurantCardDetails from "../../components/RestaurantCard.js/RestaurantCardDetails";
 import { useParams } from "react-router";
+import GlobalStateContext from "../../global/GlobalStateContext";
+import CardSelector from "./SelectProductTocard";
+import { Container, MainTitleBar } from "./styled";
 
- const RestaurantPage = (props) =>  {
+const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
 
   const params = useParams();
   // const history = useHistory();
-const paramsId = 5
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFsVXBDWDRLIiwibmFtZSI6ImFkbWluZGV2IiwiZW1haWwiOiJhZG1pbmRldkBnLmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDA1OTk0MH0.4fTfTkUtSy6ty-3_UMziJmlus4CtFDRVFx-xy3GO2J4"
+
+  const {selectcart } = useContext(GlobalStateContext);
 
   useEffect(() => {
     getRestaurantDetails();
@@ -21,54 +23,55 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ims5WlphU0NtVWZ2NTFs
 
   const getRestaurantDetails = () => {
     axios
-    .get(`${BASE_URL}/restaurants/${params.id}`, {
+      .get(`${BASE_URL}/restaurants/${params.id}`, {
         headers: {
-          auth:token,
+          auth: localStorage.getItem("token"),
         },
       })
       .then((response) => {
         setRestaurantDetails(response.data.restaurant);
-        console.log(response.data.restaurant);
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   };
 
+  const showPage = () => {
+    return selectcart ? <CardSelector></CardSelector> : null;
+  };
+
   return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      {showPage()}
+      <Container>
+        <RestaurantCardDetails
+          logoUrl={restaurantDetails.logoUrl}
+          name={restaurantDetails.name}
+          deliveryTime={restaurantDetails.deliveryTime}
+          shipping={restaurantDetails.shipping}
+          category={restaurantDetails.category}
+          address={restaurantDetails.address}
+        />
+        <MainTitleBar>Principais</MainTitleBar>
 
-    <S.Container>
-      <RestaurantCardDetails
-        logoUrl={restaurantDetails.logoUrl}
-        name={restaurantDetails.name}
-        deliveryTime={restaurantDetails.deliveryTime}
-        shipping={restaurantDetails.shipping}
-        category={restaurantDetails.category}
-        address={restaurantDetails.address}
-      />
-    <S.MainTitleBar>Principais</S.MainTitleBar>
-     
-      {restaurantDetails &&
-        restaurantDetails.products &&
-        restaurantDetails.products.map((Item) => {
-          return (
-            <ProductCard
-              restaurant={Item}
-              key={Item.id}
-              id={Item.id}
-              name={Item.name}
-              Photo={Item.photoUrl}
-              description={Item.description}
-              price={Item.price}
-            />
-          );
-        })}
-
-      
-      
-    </S.Container>
+        {restaurantDetails &&
+          restaurantDetails.products &&
+          restaurantDetails.products.map((Item) => {
+            return (
+              <ProductCard
+                resta={Item}
+                key={Item.id}
+                id={Item.id}
+                name={Item.name}
+                Photo={Item.photoUrl}
+                description={Item.description}
+                price={Item.price.toFixed(2)}
+              />
+            );
+          })}
+      </Container>
+    </div>
   );
-}
+};
 
-export default RestaurantPage
-
+export default RestaurantPage;

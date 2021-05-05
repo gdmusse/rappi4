@@ -1,7 +1,6 @@
-import { Card, makeStyles, Typography } from "@material-ui/core";
-import { Image } from "@material-ui/icons";
-import React, { useState } from "react";
-import * as S from "../../pages/RestaurantPage/styled";
+import {  makeStyles, Typography } from "@material-ui/core";
+import React, { useContext} from "react";
+import GlobalStateContext from "../../global/GlobalStateContext";
 import { ButtonAdd, StyledCard,CardImgFood, InfoItemFood, } from "./styled";
 
 const useStyles = makeStyles({
@@ -9,9 +8,18 @@ const useStyles = makeStyles({
 });
 function ProductCard(props) {
   const classes = useStyles();
-  const [ inTheCart, setInTheCard] = useState(true)
+   const { setSelectedItem,  setSelectcart} = useContext(GlobalStateContext);
+  
+
+  const selectItemToCart = () => {
+    setSelectcart(true)  
+    setSelectedItem(props.resta);
+  }
+
 
   return (
+
+    
     <div>
       <StyledCard
         style={{
@@ -34,13 +42,16 @@ function ProductCard(props) {
               R$ {props.price} 
             </Typography>
         
-        <ButtonAdd >
-          {inTheCart ? "adicionar" : "remover"}
+        <ButtonAdd  onClick={selectItemToCart} >
+          { "adicionar" }
         </ButtonAdd>
         </InfoItemFood>
       </StyledCard>
+
     </div>
   );
+
+
 }
 
 export default ProductCard;
