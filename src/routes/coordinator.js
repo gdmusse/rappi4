@@ -18,7 +18,11 @@ export const goToCartPage = (history) => {
 };
 
 export const goToRestaurantPage = (history, id) => {
-  history.push("/restaurant");
+  history.push(`/restaurant/${id}`);
+};
+
+export const goToPreviousPage = (history) => {
+  history.goBack();
 };
 
 export const goToProfile = (history) => {
@@ -33,6 +37,3 @@ export const goToEditProfile = (history) => {
   history.push("/edit-profile");
 };
 
-export const goToPreviousPage = (history) => {
-  history.goBack();
-};

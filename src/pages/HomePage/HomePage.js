@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import useInput from "../../hooks/useInput";
 import TextField from "@material-ui/core/TextField";
 import BASE_URL from "../../constants/urls";
@@ -7,41 +7,56 @@ import axios from "axios";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useHistory } from "react-router-dom";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
-import { CollectionsBookmarkRounded } from "@material-ui/icons";
 import styled from "styled-components";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
+import Loader from "../../components/Loader"
+
 const FullScreen = styled.div`
- width: 100%;
-    height: 100%;
-    overflow: hidden;
-`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
 const DivCards = styled.div`
   margin: 20px;
 `;
 
 const DivCategories = styled.div`
-      height: 100%;
-    width: 100%;
-    overflow: auto;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 `;
+
+const DivInput = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 20px;
+`;
+
+const DivVazia = styled.div`
+  text-align: center;
+  color: grey;
+  margin-top: 50px;
+`;
+
 const HomePage = () => {
   useProtectedPage();
 
   const {
-    setAlertMsg,
-    setAlertSeverity,
-    setOpenAlert,
     setRestaurants,
     restaurants,
-    categories,
     setCategories,
     selectedCategory,
-    setSelectedCategory,
+    categories,
+    loading,
+    setLoading
   } = useContext(GlobalStateContext);
+
+  const [search, setSearch] = useInput("");
 
   const history = useHistory();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${BASE_URL}/restaurants`, {
         headers: {
@@ -50,10 +65,14 @@ const HomePage = () => {
       })
       .then((res) => {
         setRestaurants(res.data.restaurants);
+      
       })
       .catch((err) => {
         console.log(err.message);
-      });
+      })
+      .then(()=>{
+        setLoading(false);
+     });
   }, []);
 
   const restaurantsCategories = restaurants
@@ -62,13 +81,33 @@ const HomePage = () => {
     })
     .filter((category, index, self) => {
       return self.indexOf(category) === index;
-    });
+    })
+    .sort((a,b) => {
+      const nameA = a.toLowerCase();
+      const nameB = b.toLowerCase();
+      return nameA.localeCompare(nameB);
+    })
+    ;
 
-  const restaurantsCards = restaurants.map((restaurant) => {
+  useEffect(() => {
+    setCategories(restaurantsCategories);
+  }, [restaurants]);
+
+  const filteredRestaurants = restaurants.filter((restaurant) => {
+    const restaurantName = restaurant.name.toLowerCase();
+    if (restaurantName.includes(search.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  const restaurantsCards = filteredRestaurants.map((restaurant) => {
     if (selectedCategory === "" || selectedCategory === null) {
       return (
         <RestaurantCard
           key={restaurant.id}
+          id={restaurant.id}
           logoUrl={restaurant.logoUrl}
           name={restaurant.name}
           deliveryTime={restaurant.deliveryTime}
@@ -80,6 +119,7 @@ const HomePage = () => {
       return (
         <RestaurantCard
           key={restaurant.id}
+          id={restaurant.id}
           logoUrl={restaurant.logoUrl}
           name={restaurant.name}
           deliveryTime={restaurant.deliveryTime}
@@ -89,22 +129,34 @@ const HomePage = () => {
     }
   });
 
-  useEffect(() => {
-    setCategories(restaurantsCategories);
-  }, [restaurantsCategories[0]]);
-
-/*   console.log("rc", restaurantsCategories);
-
-  console.log("categories", categories);
- */
-
   return (
     <FullScreen>
+      <DivInput>
+        <TextField
+          name={"search"}
+          value={search}
+          onChange={setSearch}
+          variant={"outlined"}
+          label={"Restaurante"}
+          margin={"normal"}
+          fullWidth
+        />
+      </DivInput>
+
       <DivCategories>
         <CategoryCard />
       </DivCategories>
-
-      <DivCards>{restaurantsCards}</DivCards>
+      {loading ? <Loader/> : ""}
+      {loading === false && filteredRestaurants.length !== 0 ? (
+        <DivCards>{restaurantsCards}</DivCards>
+      ) : (
+        ""
+      )}
+      {loading === false && filteredRestaurants.length === 0 ? (
+        <DivVazia>"Não encontramos :("</DivVazia>
+      ) : (
+        ""
+      )}
     </FullScreen>
   );
 };
