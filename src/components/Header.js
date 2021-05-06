@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   appBarMod: {
     backgroundColor: "#FFFF",
     boxShadow: "0 0.5px 0 0 rgba(0, 0, 0, 0.25)",
+    height: '8vh',
+    display: 'flex',
+    justifyContent: 'center',
   },
   typography: {
     flexGrow: 1,
