@@ -81,8 +81,7 @@ const RestaurantPage = (props) => {
             }
           })}
           
-  
-        
+
         <MainTitleBar>Acompanhamentos</MainTitleBar> 
 
         {restaurantDetails &&
