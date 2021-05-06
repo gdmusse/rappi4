@@ -8,13 +8,14 @@ import homepagecolor from '../assets/images/homepagecolor.svg'
 import shoppingcart from '../assets/images/shopping-cart.svg'
 import shoppingcartcolor from '../assets/images/shopping-cartcolor.svg'
 import { HideScroll } from 'react-hide-on-scroll'
-
+import { useHistory } from 'react-router';
+import { goToHomePage, goToCartPage, goToProfile } from '../routes/coordinator'
 
 
 export const Image = styled.img`
   width: 5vw;
   max-width: 50px;
- 
+
 `;
 
 const Container = styled.div`
@@ -29,9 +30,12 @@ position: fixed;
 bottom:0;
 overflow: hidden;
 box-shadow: "0 0.5px 0 0 rgba(0, 0, 0, 0.25)";
+
 `
 
 const Footer = () => {
+    const history = useHistory()
+
 
 
     return (
@@ -39,9 +43,9 @@ const Footer = () => {
 
 
             <Container >
-                <IconButton><Image src={homepage} /></IconButton>
-                <IconButton><Image src={shoppingcart} /></IconButton>
-                <IconButton ><Image src={avatar} /></IconButton>
+                <IconButton onClick={() => goToHomePage(history)}><Image src={homepage} /></IconButton>
+                <IconButton onClick={() => goToCartPage(history)}><Image src={shoppingcart} /></IconButton>
+                <IconButton onClick={() => goToProfile(history)}><Image src={avatar} /></IconButton>
             </Container>
 
         </HideScroll>
