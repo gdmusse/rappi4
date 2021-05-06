@@ -1,34 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {goToPreviousPage} from "../../routes/coordinator"
-import { TextField } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import useForm from '../../hooks/useForm'
-import { InputsContainer, ScreenContainer } from "./styled";
-import Button from '@material-ui/core/Button'
-import axios from 'axios';
-import BASE_URL from '../../constants/urls';
-import GlobalStateContext from '../../global/GlobalStateContext';
-import useProtectedPage from '../../hooks/useProtectedPage';
+import React, { useEffect } from 'react'
+import useProtectedPage from '../../hooks/useProtectedPage'
+import { InputsContainer, ScreenContainer } from "./styled"
 import {goToProfile} from '../../routes/coordinator'
+import { TextField } from "@material-ui/core"
+import { useHistory } from "react-router-dom"
+import Button from '@material-ui/core/Button'
+import BASE_URL from '../../constants/urls'
+import useForm from '../../hooks/useForm'
+import axios from 'axios'
 
 const EditAddressPage = () => {
     const history = useHistory();
     const [form, onChange, clear, setForm] = useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""})
     useProtectedPage();
-
-    const {
-      setAlertMsg,
-      setAlertSeverity,
-      setOpenAlert,
-      setRestaurants,
-      restaurants,
-      categories,
-      setCategories,
-      selectedCategory,
-      setSelectedCategory,
-      profile,
-      setProfile
-    } = useContext(GlobalStateContext);
 
     useEffect(() => {
         axios
@@ -39,10 +23,9 @@ const EditAddressPage = () => {
           })
           .then((res) => {
             setForm(res.data.address);
-            console.log(res)
           })
-          .catch((err) => {
-            console.log(err.message);
+          .catch((error) => {
+            window.alert(error.message);
           });
       }, []);
 
@@ -57,11 +40,10 @@ const EditAddressPage = () => {
             auth: localStorage.getItem('token')
           }
         }
-        console.log(axiosConfig)
         axios.put(`${BASE_URL}/address`, form, axiosConfig).then(response => {
           goToProfile(history)
         }).catch(error => {
-          console.log(error)
+          window.alert(error.message);
         })
       }
     return(
@@ -89,6 +71,16 @@ const EditAddressPage = () => {
                         margin={"normal"}
                         required
                         type={"number"}
+                    />
+                     <TextField
+                        name={"complement"}
+                        value={form.complement}
+                        onChange={onChange}
+                        label={"Complement"}
+                        variant={"outlined"}
+                        fullWidth
+                        margin={"normal"}
+                        type={"complement"}
                     />
                     <TextField
                         name={"neighbourhood"}
@@ -123,16 +115,6 @@ const EditAddressPage = () => {
                         required
                         type={"state"}
                     />
-                    <TextField
-                        name={"complement"}
-                        value={form.complement}
-                        onChange={onChange}
-                        label={"Complement"}
-                        variant={"outlined"}
-                        fullWidth
-                        margin={"normal"}
-                        type={"complement"}
-                    />
                 <Button
                 type={"submit"}
                 variant={"contained"}
@@ -145,7 +127,6 @@ const EditAddressPage = () => {
         </InputsContainer>
       </ScreenContainer>
     )
-
 }
 
 export default EditAddressPage;

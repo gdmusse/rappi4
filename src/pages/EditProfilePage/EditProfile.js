@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {goToPreviousPage} from "../../routes/coordinator"
-import { TextField } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import useForm from '../../hooks/useForm'
-import { InputsContainer, ScreenContainer } from "./styled";
-import Button from '@material-ui/core/Button'
-import axios from 'axios';
-import BASE_URL from '../../constants/urls';
+import React, { useContext, useEffect } from 'react'
 import GlobalStateContext from '../../global/GlobalStateContext';
 import useProtectedPage from '../../hooks/useProtectedPage';
+import { InputsContainer, ScreenContainer } from "./styled";
 import {goToProfile} from '../../routes/coordinator'
+import { TextField } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import Button from '@material-ui/core/Button'
+import BASE_URL from '../../constants/urls';
+import useForm from '../../hooks/useForm'
+import axios from 'axios';
 
 const EditProfilePage = () => {
     const history = useHistory();
@@ -40,8 +39,8 @@ const EditProfilePage = () => {
           .then((res) => {
             setForm(res.data.user);
           })
-          .catch((err) => {
-            console.log(err.message);
+          .catch((error) => {
+            window.alert(error.message);
           });
       }, []);
 
@@ -56,14 +55,12 @@ const EditProfilePage = () => {
             auth: localStorage.getItem('token')
           }
         }
-        console.log(axiosConfig)
         axios.put(`${BASE_URL}/profile`, form, axiosConfig).then(response => {
           goToProfile(history)
         }).catch(error => {
-          console.log(error)
+          window.alert(error.message);
         })
       }
-      console.log(form)
     return(
         <ScreenContainer>
             <InputsContainer>
@@ -113,7 +110,6 @@ const EditProfilePage = () => {
         </InputsContainer>
       </ScreenContainer>
     )
-
 }
 
 export default EditProfilePage;
