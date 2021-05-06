@@ -91,6 +91,7 @@ const HomePage = () => {
 
   useEffect(() => {
     setCategories(restaurantsCategories);
+    
   }, [restaurantsCategories[0]]);
 
 /*   console.log("rc", restaurantsCategories);

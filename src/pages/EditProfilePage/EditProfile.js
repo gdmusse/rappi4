@@ -109,8 +109,7 @@ const EditProfilePage = () => {
                     margin={"normal"}>
                 Save
                  </Button>
-            </form>
-            <button onClick={() => console.log(form)}>Teste</button>
+            </form> 
         </InputsContainer>
       </ScreenContainer>
     )

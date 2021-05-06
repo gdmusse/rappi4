@@ -3,6 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 export const PostCardContainer = styled.div`
+  
   width: 60vw;
   margin: 5%;
   @media screen and (max-width: 992px) {
@@ -26,4 +27,23 @@ export const RightContent = styled.div`
 
 export const LeftContent = styled.div`
 
+`
+
+export const TitleAddress = styled.p`
+  color: rgba(0, 0, 0, 0.5);
+`
+
+export const ButtonProfile = styled.button`
+  border: none;
+  background-color: #ffff;
+`
+export const ButtonEddress = styled.button`
+  border: none;
+`
+export const CardRes = styled.div`
+
+`
+
+export const CardColor = styled.div`
+  background-color: #eeeeeb;
 `
