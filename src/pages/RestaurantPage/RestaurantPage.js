@@ -12,6 +12,9 @@ import CardRemove from "./RemoveProducts";
 
 const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
+  const [productsRestaurant, setProductsRestaurant] = useState([]);
+  const [categoryGroups, setCategoryGroups] = useState([]);
+
   const params = useParams();
   const history = useHistory();
 
@@ -24,6 +27,10 @@ const RestaurantPage = (props) => {
     setActualPage("Restaurante");
     setBack(true);
   }, []);
+
+  useEffect(() => {
+    setProductsRestaurant(restaurantDetails.products);
+  }, [restaurantDetails]);
 
   const getRestaurantDetails = () => {
     axios
@@ -48,6 +55,24 @@ const RestaurantPage = (props) => {
     ) : null;
   };
 
+  useEffect(() => {
+    let groupedCategories = groupCategories(productsRestaurant, "category");
+    setCategoryGroups(groupedCategories);
+  }, [productsRestaurant]);
+
+  function groupCategories(objectArray, property) {
+    if (objectArray) {
+      return objectArray.reduce(function (acc, obj) {
+        let key = obj[property];
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(obj);
+        return acc;
+      }, {});
+    }
+  }
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       {showPage()}
@@ -60,52 +85,25 @@ const RestaurantPage = (props) => {
           category={restaurantDetails.category}
           address={restaurantDetails.address}
         />
-        <MainTitleBar>Principais</MainTitleBar>
 
-        {restaurantDetails &&
-          restaurantDetails.products &&
-          restaurantDetails.products.map((Item) => {
-            if (Item.category !== "Acompanhamento" && Item.category !== "Bebida") {
-              return (
+        {categoryGroups &&
+          Object.entries(categoryGroups).map(([categoryName, items]) => (
+            <div>
+              <MainTitleBar>{categoryName}</MainTitleBar>
+              {items.map((item) => (
                 <ProductCard
-                  category={Item.category}
-                  prod={Item}
-                  key={Item.id}
-                  id={Item.id}
-                  name={Item.name}
-                  Photo={Item.photoUrl}
-                  description={Item.description}
-                  price={Item.price.toFixed(2)}
+                  category={item.category}
+                  prod={item}
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  Photo={item.photoUrl}
+                  description={item.description}
+                  price={item.price.toFixed(2)}
                 />
-              );
-            }
-          })}
-          
-  
-        
-        <MainTitleBar>Acompanhamentos</MainTitleBar> 
-
-        {restaurantDetails &&
-          restaurantDetails.products &&
-          restaurantDetails.products.map((Item) => {
-            if (Item.category === "Acompanhamento" || Item.category === "Bebida") {
-              return (
-                <ProductCard
-                  category={Item.category}
-                  prod={Item}
-                  key={Item.id}
-                  id={Item.id}
-                  name={Item.name}
-                  Photo={Item.photoUrl}
-                  description={Item.description}
-                  price={Item.price.toFixed(2)}
-                />
-              );
-            }
-          })}
-          
-        
-      
+              ))}
+            </div>
+          ))}
       </Container>
     </div>
   );
