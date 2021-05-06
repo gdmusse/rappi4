@@ -7,6 +7,7 @@ import BASE_URL from "../../constants/urls";
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import OrdersCard from "../../components/OrdersHistoryCard/ordersCard"
 import Footer from "../../components/Footer"
+import Header from "../../components/Header"
 import {
   PostCardContainer,
   PostCardContent,
@@ -58,8 +59,8 @@ const ProfilePage = () => {
       .then((res) => {
         setProfile(res.data.user);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((error) => {
+        window.alert(error.message);
       });
   } 
 
@@ -72,10 +73,9 @@ const ProfilePage = () => {
       })
       .then((res) => {
         setOrders(res.data.orders);
-        console.log(res.data)
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((error) => {
+        window.alert(error.message);
       });
   } 
 
@@ -90,9 +90,6 @@ const ProfilePage = () => {
         />
       );
   });
-
-  console.log(profile);
-
     return (
       <div>
         <PostCardContainer>
