@@ -8,6 +8,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
+import { useHistory } from "react-router";
+import { goToRestaurantPage } from "../../routes/coordinator";
 
 const DivDetalhes = styled.div`
   display: flex;
@@ -27,8 +29,9 @@ const useStyles = makeStyles({
 export default function RestaurantCard(props) {
   const classes = useStyles();
   const time2 = Number(props.deliveryTime) + 10;
+  const history = useHistory()
   return (
-    <Card
+    <Card onClick={() => goToRestaurantPage(history, props.id)}
       style={{
         border: "1px solid #b8b8b8",
         boxShadow: "none",
@@ -52,7 +55,7 @@ export default function RestaurantCard(props) {
               {props.deliveryTime} - {time2} min
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Frete R${props.shipping}
+              Frete R${props.shipping},00
             </Typography>
           </DivDetalhes>
         </CardContent>

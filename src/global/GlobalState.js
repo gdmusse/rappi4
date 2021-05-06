@@ -10,9 +10,42 @@ const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [cart, setCart] = useState([]);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [selectcart, setSelectcart] = useState(false);
+  const [selectedItem, setSelectedItem] = useState();
+  const [selectedItemRemove, setSelectedItemRemove] = useState(false);
+  const [actualPage, setActualPage] = useState("");
+  const [back, setBack] = useState(false);
   const [profile, setProfile] = useState({});
   const [orders, setOrders] = useState([]);
 
+  const addItemToCart = (newItem) => {
+    const index = cart.findIndex((i) => i.id === newItem.id);
+    let newCart = [...cart];
+    if (index === -1) {
+      newCart.push({ ...newItem, quantity: Number(cartQuantity) });
+    } else {
+      newCart[index].quantity += Number(cartQuantity);
+    }
+    
+    setCart(newCart);
+    alert(`${newItem.name} foi adicionado ao seu carrinho!`);
+  };
+
+  const removeItemFromCart = (itemToRemove) => {
+    const index = cart.findIndex((i) => i.id === itemToRemove.id);
+    let newCart = [...cart];
+    if (newCart[index].quantity > 0) {
+      newCart.splice(index, 1);
+    } else {
+      setSelectedItemRemove(false)
+    }
+    setCart(newCart);
+  };
+
+  console.log("esse é o array do carrinho",cart)
+  
   return (
     <GlobalStateContext.Provider
       value={{
@@ -31,6 +64,16 @@ const GlobalState = (props) => {
         setCategories,
         selectedCategory,
         setSelectedCategory,
+        cart, setCart,
+        addItemToCart,
+        removeItemFromCart,
+        cartQuantity, setCartQuantity,
+        selectcart, setSelectcart,
+        selectedItem, setSelectedItem,
+        removeItemFromCart,
+        selectedItemRemove, setSelectedItemRemove,
+        actualPage, setActualPage,
+        back, setBack,
         profile,
         setProfile,
         orders,
