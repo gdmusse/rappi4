@@ -59,7 +59,6 @@ const CategoryCard = () => {
       value={selectedCategory}
       exclusive
       onChange={handleChangeCategory}
-      disableRipple
     >
       {categoriesCards}
     </StyledToggleButtonGroup>

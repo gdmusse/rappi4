@@ -6,8 +6,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import BASE_URL from "../../constants/urls";
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import OrdersCard from "../../components/OrdersHistoryCard/ordersCard"
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
+
 import {
   PostCardContainer,
   PostCardContent,
@@ -31,12 +30,8 @@ const ProfilePage = () => {
     setAlertMsg,
     setAlertSeverity,
     setOpenAlert,
-    setRestaurants,
-    restaurants,
-    categories,
-    setCategories,
-    selectedCategory,
-    setSelectedCategory,
+    setActualPage,
+    setBack,
     profile,
     setProfile,
     orders,
@@ -46,6 +41,8 @@ const ProfilePage = () => {
   useEffect(() => {
     getProfile()
     getOrdersHistory()
+    setBack(false)
+    setActualPage("Meu perfil")
   }, []);
 
 
@@ -128,7 +125,6 @@ const ProfilePage = () => {
           </Message>
         )}
         </PostCardContainer>
-        <Footer/>
       </div>
     );
   }

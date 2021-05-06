@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import styled from 'styled-components'
 import avatar from '../assets/images/avatar.svg'
@@ -9,13 +9,12 @@ import shoppingcart from '../assets/images/shopping-cart.svg'
 import shoppingcartcolor from '../assets/images/shopping-cartcolor.svg'
 import { HideScroll } from 'react-hide-on-scroll'
 import { useHistory } from 'react-router';
-import { goToHomePage, goToCartPage, goToProfile } from '../routes/coordinator'
-
+import { goToHomePage, goToCartPage, goToProfile } from '../routes/coordinator';
+import GlobalStateContext from "../global/GlobalStateContext"
 
 export const Image = styled.img`
-  width: 5vw;
+  width: 7vw;
   max-width: 50px;
-
 `;
 
 const Container = styled.div`
@@ -34,6 +33,8 @@ box-shadow: "0 0.5px 0 0 rgba(0, 0, 0, 0.25)";
 `
 
 const Footer = () => {
+    const {actualPage} = useContext(GlobalStateContext)
+
     const history = useHistory()
 
 
@@ -43,9 +44,9 @@ const Footer = () => {
 
 
             <Container >
-                <IconButton onClick={() => goToHomePage(history)}><Image src={homepage} /></IconButton>
-                <IconButton onClick={() => goToCartPage(history)}><Image src={shoppingcart} /></IconButton>
-                <IconButton onClick={() => goToProfile(history)}><Image src={avatar} /></IconButton>
+                <IconButton onClick={() => goToHomePage(history)}>{actualPage === "Rappi4" ?  <Image src={homepagecolor} /> :  <Image src={homepage} /> }</IconButton>
+                <IconButton onClick={() => goToCartPage(history)}>{actualPage === "Meu carrinho" ?  <Image src={shoppingcartcolor} /> :  <Image src={shoppingcart} /> }</IconButton>
+                <IconButton onClick={() => goToProfile(history)}>{actualPage === "Meu perfil" ?  <Image src={avatarcolor} /> :  <Image src={avatar} /> }</IconButton>
             </Container>
 
         </HideScroll>

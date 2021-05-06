@@ -1,26 +1,15 @@
 import React, { useContext} from "react";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import {
   OrderButton,
   CloseButton,
   OrderImage,
   SelectionTitle,
-  InputAdd,
 } from "./styled";
 import Box from "@material-ui/core/Box";
 import GlobalStateContext from "../../global/GlobalStateContext";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    padding: "0",
-    color: "primary",
-  },
-}));
 
 export default function CardRemove(props) {
   const {
