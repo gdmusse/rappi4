@@ -12,17 +12,12 @@ import CardRemove from "./RemoveProducts";
 
 const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
-
   const params = useParams();
   const history = useHistory();
 
-  const {
-    cart,
-    selectcart,
-    selectedItemRemove,
-    setActualPage,
-    setBack,
-  } = useContext(GlobalStateContext);
+  const { selectcart, selectedItemRemove, setActualPage, setBack } = useContext(
+    GlobalStateContext
+  );
 
   useEffect(() => {
     getRestaurantDetails();
@@ -70,18 +65,47 @@ const RestaurantPage = (props) => {
         {restaurantDetails &&
           restaurantDetails.products &&
           restaurantDetails.products.map((Item) => {
-            return (
-              <ProductCard
-                prod={Item}
-                key={Item.id}
-                id={Item.id}
-                name={Item.name}
-                Photo={Item.photoUrl}
-                description={Item.description}
-                price={Item.price.toFixed(2)}
-              />
-            );
+            if (Item.category !== "Acompanhamento" && Item.category !== "Bebida") {
+              return (
+                <ProductCard
+                  category={Item.category}
+                  prod={Item}
+                  key={Item.id}
+                  id={Item.id}
+                  name={Item.name}
+                  Photo={Item.photoUrl}
+                  description={Item.description}
+                  price={Item.price.toFixed(2)}
+                />
+              );
+            }
           })}
+          
+  
+        
+        <MainTitleBar>Acompanhamentos</MainTitleBar> 
+
+        {restaurantDetails &&
+          restaurantDetails.products &&
+          restaurantDetails.products.map((Item) => {
+            if (Item.category === "Acompanhamento" || Item.category === "Bebida") {
+              return (
+                <ProductCard
+                  category={Item.category}
+                  prod={Item}
+                  key={Item.id}
+                  id={Item.id}
+                  name={Item.name}
+                  Photo={Item.photoUrl}
+                  description={Item.description}
+                  price={Item.price.toFixed(2)}
+                />
+              );
+            }
+          })}
+          
+        
+      
       </Container>
     </div>
   );
