@@ -39,7 +39,6 @@ const Header = () => {
   const classes = useStyles();
   const { actualPage, back } = useContext(GlobalStateContext);
 
-  console.log("back", back);
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBarMod}>

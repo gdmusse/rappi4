@@ -42,8 +42,6 @@ const GlobalState = (props) => {
     }
     setCart(newCart);
   };
-
-  console.log("esse é o array do carrinho",cart)
   
   return (
     <GlobalStateContext.Provider
