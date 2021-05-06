@@ -43,7 +43,8 @@ const AddressPage = () => {
     setOpenAlert,
     setAlertMsg,
     setAlertSeverity,
-    setActualPage
+    setActualPage,
+    setBack
   } = useContext(GlobalStateContext);
 
   const onSubmitForm = (event) => {
@@ -53,6 +54,7 @@ const AddressPage = () => {
 
   useEffect(() => {
     setActualPage("");
+    setBack(false);
   }, [])
 
 
@@ -85,7 +87,8 @@ const AddressPage = () => {
             name={"street"}
             value={form.street}
             onChange={onChange}
-            label={"Rua/Av"}
+            label={"Logradouro"}
+            placeholder={"Rua / Av."}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -97,6 +100,7 @@ const AddressPage = () => {
             value={form.number}
             onChange={onChange}
             label={"Número"}
+            placeholder={"Número"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -108,6 +112,7 @@ const AddressPage = () => {
             value={form.complement}
             onChange={onChange}
             label={"Complemento"}
+            placeholder={"Apto / Bloco"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -118,6 +123,7 @@ const AddressPage = () => {
             value={form.neighbourhood}
             onChange={onChange}
             label={"Bairro"}
+            placeholder={"Bairro"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -129,6 +135,7 @@ const AddressPage = () => {
             value={form.city}
             onChange={onChange}
             label={"Cidade"}
+            placeholder={"Cidade"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
@@ -140,6 +147,7 @@ const AddressPage = () => {
             value={form.state}
             onChange={onChange}
             label={"Estado"}
+            placeholder={"Estado"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
