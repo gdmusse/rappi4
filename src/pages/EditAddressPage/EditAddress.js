@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
+import GlobalStateContext from '../../global/GlobalStateContext';
 import useProtectedPage from '../../hooks/useProtectedPage'
 import { InputsContainer, ScreenContainer } from "./styled"
 import {goToProfile} from '../../routes/coordinator'
@@ -14,7 +15,14 @@ const EditAddressPage = () => {
     const [form, onChange, clear, setForm] = useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""})
     useProtectedPage();
 
+    const {
+      setActualPage,
+      setBack,
+    } = useContext(GlobalStateContext);
+
     useEffect(() => {
+      setBack(true)
+      setActualPage("Endereço")
         axios
           .get(`${BASE_URL}/profile/address`, {
             headers: {

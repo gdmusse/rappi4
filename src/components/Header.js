@@ -42,7 +42,7 @@ const Header = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBarMod}>
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" className={classes.toolbarMod}>
           {back === false ? (
             <></>
           ) : (

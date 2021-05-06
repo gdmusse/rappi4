@@ -17,7 +17,7 @@ const FullScreen = styled.div`
   overflow: hidden;
 `;
 const DivCards = styled.div`
-  margin: 20px;
+  margin: 10px 2%;
 `;
 
 const DivCategories = styled.div`
