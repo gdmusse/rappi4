@@ -9,6 +9,8 @@ import {
   BoxPrices,
   ShippingPrice,
   Linha,
+  PaymentOption,
+  Method,
   Confirm
 } from './styled'
 import {
@@ -120,19 +122,21 @@ const CartPage = () => {
                   > Payment method
             </Typography>
             <Linha/>
+
+            <Method>
+              <PaymentOption type='radio' value='Cash' name='method' />Cash
+            </Method>
+
+            <Method>
+              <PaymentOption type='radio' value='Credit' name='method' />Credit card
+            </Method>
+
           </DivPadding>
       </div>
-
-
-      <DivPadding $padding='0px 20px 20px 20px'>
+      
+      <DivPadding>
         <Confirm>Confirm</Confirm>
       </DivPadding>
-
-
-
-      
-
-
 
       </Height>
 
