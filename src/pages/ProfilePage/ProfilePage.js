@@ -123,7 +123,13 @@ const ProfilePage = () => {
         <PostCardContainer>
           <p>Histórico de pedidos</p>
           <hr/>
+        {orders.length > 0 ? (
          {ordersHistoryCards}
+         ): (
+          <Message>
+            Você não realizou nenhum pedido
+          </Message>
+        )}
         </PostCardContainer>
         <Footer/>
       </div>
@@ -132,11 +138,11 @@ const ProfilePage = () => {
   
   export default ProfilePage;
 
-  const Ender = styled.p`
-  
-  `
-
   const ProfileEddres = styled.p`
   
+  `
+  const Message = styled.div`
+    text-align: center;
+    padding: 10px;
   `
 
