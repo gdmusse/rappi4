@@ -1,10 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  secondaryColor, 
   mainGray,
   primaryColor,
-} from '../../constants/colors'
+} from '../../../constants/colors'
 import {
     DivPadding,
     BoxProduct,
@@ -12,7 +11,7 @@ import {
     BoxQuantity,
     BoxInfos,
     RemoveButton,
-  } from './styled'
+  } from '../styled'
   import { Typography } from "@material-ui/core"
   import classNames from 'classnames'
   

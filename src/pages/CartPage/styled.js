@@ -6,13 +6,14 @@ import {
 } from '../../constants/colors'
 
 export const Height = styled.div` 
-  min-height: 92vh;
+  min-height: 84vh;
   display: flex;
   justify-content: space-between;
   flex-flow: column;
+  -bottom: 20px;
 `
 
-export const DivAdress = styled.div`
+export const DivAddress = styled.div`
   background-color: ${secondaryColor};
   display: flex;
   flex-flow: column;
@@ -106,4 +107,9 @@ export const Method = styled.div`
 
 export const PaymentOption = styled.input ` 
 
+`
+
+export const Spacing = styled.div `
+  height: 20px;
+  width: 100%;
 `
