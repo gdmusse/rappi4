@@ -91,10 +91,19 @@ export const Linha = styled.hr`
 
 export const Confirm = styled.button` 
   font-size: 16px;
-  bottom: 20px;
+
   width: 100%;
   outline: none;
   background-color: ${primaryColor};
   border: none;
   padding: 10px 0px 10px 0px;
 ` 
+
+export const Method = styled.div` 
+  display: flex;
+  align-items: center;
+`
+
+export const PaymentOption = styled.input ` 
+
+`
