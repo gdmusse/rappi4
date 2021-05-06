@@ -50,7 +50,8 @@ const HomePage = () => {
     loading,
     setLoading,
     setActualPage,
-    setBack
+    setBack,
+    setCart,
   } = useContext(GlobalStateContext);
 
   const [search, setSearch] = useInput("");
@@ -59,6 +60,7 @@ const HomePage = () => {
 
   useEffect(() => {
     setActualPage("Rappi4");
+    setCart([]);
     setBack(false);
     setLoading(true);
     axios
