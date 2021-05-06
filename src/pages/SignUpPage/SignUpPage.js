@@ -50,11 +50,13 @@ const SignUpPage = () => {
   });
 
   const {
-    setActualPage
+    setActualPage,
+    setBack
   } = useContext(GlobalStateContext);
 
   useEffect(() => {
     setActualPage("");
+    setBack(true);
   }, [])
 
   const onSubmitForm = (event) => {

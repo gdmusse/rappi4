@@ -55,7 +55,7 @@ export default function RestaurantCard(props) {
               {props.deliveryTime} - {time2} min
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Frete R${props.shipping}
+              Frete R${props.shipping},00
             </Typography>
           </DivDetalhes>
         </CardContent>

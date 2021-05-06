@@ -103,6 +103,7 @@ const LoginPage = () => {
               margin={"normal"}
               required
               type={"email"}
+              placeholder={"email@email.com"}
             />
 
             <TextField
@@ -113,6 +114,7 @@ const LoginPage = () => {
               variant={"outlined"}
               fullWidth
               margin={"normal"}
+              placeholder={"Mínimo 6 caracteres"}
               required
               type={showPassword ? "text" : "password"}
               InputProps={{
