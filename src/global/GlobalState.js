@@ -18,6 +18,7 @@ const GlobalState = (props) => {
   const [actualPage, setActualPage] = useState("");
   const [back, setBack] = useState(false);
   const [profile, setProfile] = useState({});
+  const [orders, setOrders] = useState([]);
 
   const addItemToCart = (newItem) => {
     const index = cart.findIndex((i) => i.id === newItem.id);
@@ -74,7 +75,9 @@ const GlobalState = (props) => {
         actualPage, setActualPage,
         back, setBack,
         profile,
-        setProfile
+        setProfile,
+        orders,
+        setOrders
       }}
     >
       {props.children}

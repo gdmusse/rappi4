@@ -135,6 +135,19 @@ const HomePage = () => {
     }
   });
 
+<<<<<<< HEAD
+  useEffect(() => {
+    setCategories(restaurantsCategories);
+    
+  }, [restaurantsCategories[0]]);
+
+/*   console.log("rc", restaurantsCategories);
+
+  console.log("categories", categories);
+ */
+
+=======
+>>>>>>> origin/master
   return (
     <FullScreen>
       <DivInput>
