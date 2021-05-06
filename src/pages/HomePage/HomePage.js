@@ -135,7 +135,6 @@ const HomePage = () => {
     }
   });
 
-<<<<<<< HEAD
   useEffect(() => {
     setCategories(restaurantsCategories);
     
@@ -146,8 +145,6 @@ const HomePage = () => {
   console.log("categories", categories);
  */
 
-=======
->>>>>>> origin/master
   return (
     <FullScreen>
       <DivInput>

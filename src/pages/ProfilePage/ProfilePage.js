@@ -6,6 +6,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import BASE_URL from "../../constants/urls";
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import OrdersCard from "../../components/OrdersHistoryCard/ordersCard"
+import Footer from "../../components/Footer"
 import {
   PostCardContainer,
   PostCardContent,
@@ -78,21 +79,15 @@ const ProfilePage = () => {
       });
   } 
 
-  function dataDoPedido(data){
-    const dia = data.getDate().toString().padStart(2, "0")
-    const mes = (data.getMonth()+1).toString().padStart(2, "0")
-    const ano = data.getFullYear();
-    return `${dia}/${mes}/${ano}`
-  }
+
 
   const ordersHistoryCards = orders.map((order) => {
       return (
-        <div>
-        <h1>{dataDoPedido(new Date(order.createdAt))}</h1>
         <OrdersCard
         restaurantName={order.restaurantName}
+        createdAt={order.createdAt}
+        totalPrice={order.totalPrice}
         />
-        </div>
       );
   });
 
@@ -128,8 +123,9 @@ const ProfilePage = () => {
         <PostCardContainer>
           <p>Histórico de pedidos</p>
           <hr/>
-          <div>{ordersHistoryCards}</div>
+         {ordersHistoryCards}
         </PostCardContainer>
+        <Footer/>
       </div>
     );
   }
