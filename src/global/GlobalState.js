@@ -18,12 +18,14 @@ const GlobalState = (props) => {
   const [actualPage, setActualPage] = useState("");
   const [back, setBack] = useState(false);
   const [profile, setProfile] = useState({});
+  const [ restaurantId, setRestaurantId] = useState("")
+  const [cardClearCart , setCardClearCart] = useState (false)
 
   const addItemToCart = (newItem) => {
     const index = cart.findIndex((i) => i.id === newItem.id);
     let newCart = [...cart];
     if (index === -1) {
-      newCart.push({ ...newItem, quantity: Number(cartQuantity) });
+      newCart.push({ idRestaurant: (restaurantId), ...newItem, quantity: Number(cartQuantity) });
     } else {
       newCart[index].quantity += Number(cartQuantity);
     }
@@ -74,7 +76,11 @@ const GlobalState = (props) => {
         actualPage, setActualPage,
         back, setBack,
         profile,
-        setProfile
+        setProfile,
+        restaurantId, 
+        setRestaurantId,
+        cardClearCart , 
+        setCardClearCart,
       }}
     >
       {props.children}

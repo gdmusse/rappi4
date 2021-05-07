@@ -19,12 +19,33 @@ function ProductCard(props) {
     setSelectedItemRemove,
     setSelectedItem,
     setSelectcart,
+    restaurantId,
+    setCardClearCart,
+    
   } = useContext(GlobalStateContext);
 
+  console.log("carrinho",cart.length)
+  if (cart.length > 0 ) {
+    console.log("carrinho",  cart[0].idRestaurant)
+  }
+  
   const selectItemToCart = () => {
-    setSelectcart(true);
-    setSelectedItem(props.prod);
+    if (cart.length > 0){
+      const x = cart[0].idRestaurant
+    if (x !== restaurantId ) {
+      setCardClearCart(true) 
+    }else  {
+     setSelectcart(true)
+     setSelectedItem(props.prod)
+    } 
+      
+  }else if(cart.length === 0){
+    setSelectcart(true)
+    setSelectedItem(props.prod) 
+  }
+ 
   };
+
   const selectRemove = () => {
     setSelectedItemRemove(true);
     setSelectedItem(props.prod);
