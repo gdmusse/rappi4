@@ -60,44 +60,43 @@ export default function CardSelector(props) {
       <SelectionTitle>Selecione a quantidade desejada</SelectionTitle>
 
       <Typography
-        variant='body2'
-        textAlign='center'
-        color='textSecondary'
-        component='p'
+        variant="body2"
+        textAlign="center"
+        color="textSecondary"
+        component="p"
       >
-        <Box textAlign='center' m={1}>
-        { selectedItem.name && selectedItem.name}
+        <Box textAlign="center" m={1}>
+          {selectedItem[0].name && selectedItem[0].name}
         </Box>
       </Typography>
-      <OrderImage src={selectedItem.photoUrl} />
-
+      <OrderImage src={selectedItem[0].photoUrl} />
 
       <br />
       <form>
         <InputAdd
           required
-          name='quantidade'
-          type='number'
+          name="quantidade"
+          type="number"
           value={form.quantidade}
           onChange={onChange}
         >
-          <option value='1'>1</option>
-          <option value='2'> 2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-          <option value='6'>6</option>
-          <option value='7'>7</option>
-          <option value='8'>8</option>
-          <option value='9'>9</option>
-          <option value='10'>10</option>
+          <option value="1">1</option>
+          <option value="2"> 2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
         </InputAdd>
 
         {updateQuantity()}
       </form>
       <OrderButton
         onClick={onClickFunction}
-        type='submit'
+        type="submit"
         // fullWidth
         color={"neutralColor"}
         style={{ fontSize: "0.8rem" }}
@@ -107,4 +106,3 @@ export default function CardSelector(props) {
     </Card>
   );
 }
-
