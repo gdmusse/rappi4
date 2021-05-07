@@ -22,8 +22,9 @@ function ProductCard(props) {
   } = useContext(GlobalStateContext);
 
   const selectItemToCart = () => {
+    const idRestaurant = [props.prod, props.idRestaurant]
     setSelectcart(true);
-    setSelectedItem(props.prod);
+    setSelectedItem(idRestaurant);
   };
   const selectRemove = () => {
     setSelectedItemRemove(true);
