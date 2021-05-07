@@ -9,6 +9,7 @@ import GlobalStateContext from "../../global/GlobalStateContext";
 import CardSelector from "./SelectProductTocard";
 import { Container, MainTitleBar } from "./styled";
 import CardRemove from "./RemoveProducts";
+import ClearCart from "./clearcart";
 
 const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
@@ -17,7 +18,7 @@ const RestaurantPage = (props) => {
 
   const params = useParams();
 
-  const { selectcart, selectedItemRemove, setActualPage, setBack } = useContext(
+  const { selectcart, selectedItemRemove, setActualPage, setBack, cardClearCart } = useContext(
     GlobalStateContext
   );
 
@@ -51,7 +52,7 @@ const RestaurantPage = (props) => {
       <CardSelector></CardSelector>
     ) : selectedItemRemove ? (
       <CardRemove></CardRemove>
-    ) : null;
+    ) : cardClearCart ? ( <ClearCart></ClearCart> ): null;
   };
 
   useEffect(() => {

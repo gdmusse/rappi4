@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import useForm from "../../hooks/useForm";
 import Card from "@material-ui/core/Card";
 import {
@@ -12,6 +13,16 @@ import {
 import Box from "@material-ui/core/Box";
 import GlobalStateContext from "../../global/GlobalStateContext";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    padding: "0",
+    color: "primary",
+  },
+}));
+
 export default function CardSelector(props) {
   const {
     setCartQuantity,
@@ -19,7 +30,7 @@ export default function CardSelector(props) {
     selectedItem,
     setSelectcart,
   } = useContext(GlobalStateContext);
-  const [form, onChange] = useForm({ quantidade: "1" });
+  const [form, onChange, clear] = useForm({ quantidade: "1" });
 
   const updateQuantity = () => {
     if (form.quantidade > 0) {
@@ -48,39 +59,46 @@ export default function CardSelector(props) {
 
       <SelectionTitle>Selecione a quantidade desejada</SelectionTitle>
 
-      <Typography variant="body2" color="textSecondary" component="div">
-        <Box textAlign="center" m={1}>
-          {selectedItem[0].name}
+      <Typography
+        variant='body2'
+        textAlign='center'
+        color='textSecondary'
+        component='p'
+      >
+        <Box textAlign='center' m={1}>
+        { selectedItem.name && selectedItem.name}
         </Box>
       </Typography>
-      <OrderImage src={selectedItem[0].photoUrl} />
+      <OrderImage src={selectedItem.photoUrl} />
+
 
       <br />
       <form>
         <InputAdd
           required
-          name="quantidade"
-          type="number"
+          name='quantidade'
+          type='number'
           value={form.quantidade}
           onChange={onChange}
         >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
+          <option value='1'>1</option>
+          <option value='2'> 2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option value='5'>5</option>
+          <option value='6'>6</option>
+          <option value='7'>7</option>
+          <option value='8'>8</option>
+          <option value='9'>9</option>
+          <option value='10'>10</option>
         </InputAdd>
 
         {updateQuantity()}
       </form>
       <OrderButton
         onClick={onClickFunction}
-        type="submit"
+        type='submit'
+        // fullWidth
         color={"neutralColor"}
         style={{ fontSize: "0.8rem" }}
       >
@@ -89,3 +107,4 @@ export default function CardSelector(props) {
     </Card>
   );
 }
+
