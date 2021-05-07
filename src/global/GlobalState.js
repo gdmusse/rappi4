@@ -22,7 +22,7 @@ const GlobalState = (props) => {
 
   const addItemToCart = (newItem) => {
     if(cart.length > 0) {
-      if(newItem[1] == cart[0].idRestaurant) {
+      if(newItem[1] === cart[0].idRestaurant) {
         const index = cart.findIndex((i) => i.id === newItem[0].id);
         let newCart = [...cart];
         if (index === -1) {
@@ -97,7 +97,6 @@ const GlobalState = (props) => {
         cartQuantity, setCartQuantity,
         selectcart, setSelectcart,
         selectedItem, setSelectedItem,
-        removeItemFromCart,
         selectedItemRemove, setSelectedItemRemove,
         actualPage, setActualPage,
         back, setBack,

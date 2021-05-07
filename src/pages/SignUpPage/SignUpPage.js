@@ -48,7 +48,6 @@ const SignUpPage = () => {
     GlobalStateContext
   );
   const [form, onChange, clear, setForm] = useForm({
-
     name: "",
     email: "",
     cpf: "",

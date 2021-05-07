@@ -18,10 +18,8 @@ import {
   ButtonProfile,
   ButtonEddress,
   TitleAddress,
-  CardRes,
 } from "./styled";
 import { useHistory } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
 import { goToEditAddress, goToEditProfile } from "../../routes/coordinator";
 
 const ProfilePage = () => {
@@ -29,9 +27,6 @@ const ProfilePage = () => {
   const history = useHistory();
 
   const {
-    setAlertMsg,
-    setAlertSeverity,
-    setOpenAlert,
     setActualPage,
     setBack,
     profile,
@@ -58,7 +53,7 @@ const ProfilePage = () => {
         setProfile(res.data.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        console.log(error.message);
       });
   };
 
@@ -73,7 +68,7 @@ const ProfilePage = () => {
         setOrders(res.data.orders);
       })
       .catch((error) => {
-        window.alert(error.message);
+        console.log(error.message);
       });
   };
 

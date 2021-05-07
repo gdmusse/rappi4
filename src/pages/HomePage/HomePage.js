@@ -47,12 +47,10 @@ const HomePage = () => {
     restaurants,
     setCategories,
     selectedCategory,
-    categories,
     loading,
     setLoading,
     setActualPage,
     setBack,
-    setCart,
   } = useContext(GlobalStateContext);
 
   const [search, setSearch] = useInput("");
