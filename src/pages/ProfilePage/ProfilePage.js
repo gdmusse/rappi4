@@ -76,17 +76,6 @@ const ProfilePage = () => {
       });
   } 
 
-
-
-  const ordersHistoryCards = orders.map((order) => {
-      return (
-        <OrdersCard
-        restaurantName={order.restaurantName}
-        createdAt={order.createdAt}
-        totalPrice={order.totalPrice}
-        />
-      );
-  });
     return (
       <div>
         <PostCardContainer>
@@ -117,8 +106,16 @@ const ProfilePage = () => {
         <PostCardContainer>
           <p>Histórico de pedidos</p>
           <hr/>
-        {orders.length > 0 ? (
-         {ordersHistoryCards}
+          {orders && orders.length > 0 ? (
+         orders.map((order) => {
+          return (
+            <OrdersCard
+            restaurantName={order.restaurantName}
+            createdAt={order.createdAt}
+            totalPrice={order.totalPrice}
+            />
+          );
+      }) 
          ): (
           <Message>
             Você não realizou nenhum pedido
