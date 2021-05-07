@@ -17,6 +17,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Box from "@material-ui/core/Box";
 import GlobalStateContext from "../../global/GlobalStateContext";
+import AlertModified from "../../components/Alert";
+
 
 export const LogoImage = styled.img`
   width: 40vw;
@@ -42,7 +44,11 @@ export const InputsContainer = styled.div`
 
 const SignUpPage = () => {
   const history = useHistory();
+  const { setOpenAlert, setAlertMsg, setAlertSeverity } = useContext(
+    GlobalStateContext
+  );
   const [form, onChange, clear, setForm] = useForm({
+
     name: "",
     email: "",
     cpf: "",
@@ -75,10 +81,13 @@ const SignUpPage = () => {
         goToAddressPage(history);
       })
       .catch((error) => {
-        console.log(error);
+        setAlertMsg(error.response.data.message);
+        setAlertSeverity("error");
+        setOpenAlert(true);
         clear();
       });
   };
+
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -179,6 +188,7 @@ const SignUpPage = () => {
           </Box>
         </form>
       </InputsContainer>
+      <AlertModified />
     </ScreenContainer>
   );
 };
