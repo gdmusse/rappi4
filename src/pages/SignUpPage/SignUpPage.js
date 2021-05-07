@@ -47,14 +47,34 @@ const SignUpPage = () => {
   const { setOpenAlert, setAlertMsg, setAlertSeverity } = useContext(
     GlobalStateContext
   );
+
   const [form, onChange, clear, setForm] = useForm({
+
     name: "",
     email: "",
     cpf: "",
     password: "",
   });
 
+
+  const [confirmPassword, setConfirmPassword] = useState(true)
+
+  const onChangeConfirmPassword = (event) => {
+    if (event.target.value === form.password) {
+      setConfirmPassword(true)
+    } else {
+      setConfirmPassword(false)
+
+    }
+  };
+
+  const {
+    setActualPage,
+    setBack
+  } = useContext(GlobalStateContext);
+
   const { setActualPage, setBack } = useContext(GlobalStateContext);
+
 
   useEffect(() => {
     setActualPage("");
@@ -86,7 +106,6 @@ const SignUpPage = () => {
         clear();
       });
   };
-
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -174,8 +193,34 @@ const SignUpPage = () => {
               ),
             }}
           />
+          <TextField
+            name={"confirmPassword"}
+            onChange={onChangeConfirmPassword}
+            label={"Confirmar senha"}
+            variant={"outlined"}
+            fullWidth
+            margin={"normal"}
+            required
+            type={showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {!confirmPassword ?
+            <small>As senhas não correspondem</small> : ''}
           <Box mt={2}>
             <Button
+              disabled={!confirmPassword}
               type={"submit"}
               variant={"contained"}
               color={"primary"}
