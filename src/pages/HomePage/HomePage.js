@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useInput from "../../hooks/useInput";
 import TextField from "@material-ui/core/TextField";
 import BASE_URL from "../../constants/urls";
@@ -10,6 +10,7 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import styled from "styled-components";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Loader from "../../components/Loader"
+import StatusOrder from './StatusOrder'
 
 const FullScreen = styled.div`
   width: 100%;
@@ -55,6 +56,7 @@ const HomePage = () => {
   } = useContext(GlobalStateContext);
 
   const [search, setSearch] = useInput("");
+  const [activeOrder, setActiveOrder] = useState([])
 
   const history = useHistory();
 
@@ -137,8 +139,25 @@ const HomePage = () => {
 
   useEffect(() => {
     setCategories(restaurantsCategories);
-    
   }, [restaurantsCategories[0]]);
+
+  useEffect(() => {
+    getActiveOrder()
+  }, []);
+
+  const getActiveOrder = () => {
+    axios
+    .get(`${BASE_URL}/active-order`, {
+      headers: {
+        auth: localStorage.getItem('token'),
+      },
+    })
+    .then((response) => {
+      setActiveOrder(response.data.order)
+    })
+    .catch((error) => {
+    });
+  };
 
 /*   console.log("rc", restaurantsCategories);
 
@@ -173,6 +192,8 @@ const HomePage = () => {
       ) : (
         ""
       )}
+      {activeOrder != null ? <StatusOrder activeOrder={activeOrder}/> : ''}
+      
     </FullScreen>
   );
 };

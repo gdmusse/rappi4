@@ -4,15 +4,22 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Logout from '../../src/assets/images/logout.svg'
 import backImg from "../../src/assets/images/back.svg";
 import styled from "styled-components";
-import { goToPreviousPage } from "../routes/coordinator";
+import { goToLoginPage, goToPreviousPage } from "../routes/coordinator";
 import { useHistory } from "react-router-dom";
 import GlobalStateContext from "../global/GlobalStateContext";
 
 export const BackImage = styled.img`
   width: 5vw;
   max-width: 50px;
+`;
+
+export const LogoutIcon = styled.img`
+  width: 5vw;
+  max-width: 50px;
+  cursor: pointer;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +45,11 @@ const Header = () => {
   const history = useHistory();
   const classes = useStyles();
   const { actualPage, back } = useContext(GlobalStateContext);
+
+  const onClickLogout = () => {
+    localStorage.removeItem('token')
+    goToLoginPage(history)
+  }
 
   return (
     <div className={classes.root}>
@@ -74,6 +86,8 @@ const Header = () => {
               {actualPage}
             </Typography>
           )}
+
+              <LogoutIcon onClick={() => onClickLogout()} src={Logout} />
         </Toolbar>
       </AppBar>
     </div>

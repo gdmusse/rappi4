@@ -106,10 +106,10 @@ export const Linha = styled.hr`
 
 export const Confirm = styled.button` 
   font-size: 16px;
-
   width: 100%;
   outline: none;
   background-color: ${primaryColor};
+  opacity: ${(props) => props.$opacity || 1};
   border: none;
   padding: 10px 0px 10px 0px;
 ` 

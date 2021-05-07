@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useHistory } from 'react-router';
 import axios from 'axios'
 import BASE_URL from "../../constants/urls";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { Typography } from "@material-ui/core"
 import classNames from 'classnames'
 import { makeStyles } from "@material-ui/core/styles";
+import { goToHomePage, goToCartPage, goToProfile } from '../../routes/coordinator';
 import {
   AddressBox,
   ProductCart,
@@ -56,9 +58,12 @@ const useStyles = makeStyles((theme) => ({
 
 const CartPage = () => {
     const classes = useStyles();
+    const history = useHistory()
+
 
     const [restaurantDetails, setRestaurantDetails] = useState([]);
     const [paymentSelect, setPaymentSelect] = useState('');
+    const [disabled, setDisabled] = useState(true)
 
     const {
       setActualPage,
@@ -70,6 +75,7 @@ const CartPage = () => {
       setActualPage('Meu carrinho')
       if(cart.length > 0) {
         getRestaurantDetails()
+        setDisabled(false)
       }
     }, []);
 
@@ -92,33 +98,6 @@ const CartPage = () => {
         });
     };
     
-    // const placeOrder = () => {
-    //   let order = []
-    //   for(var i in cart) {
-    //     order.push([cart[i].id, cart[i].quantity])
-    //   }
-    //   var data = JSON.stringify({
-    //     "products": order, 
-    //     "paymentMethod": paymentSelect
-    //   });
-    //   console.log(order)
-
-    //   axios
-    //   .post(`${BASE_URL}/restaurants/${cart[0].idRestaurant}/order`, {
-    //     headers: {
-    //       auth: localStorage.getItem('token'),
-    //     },
-    //     data: data
-    //   }) 
-    //   .then((response) => { 
-    //     console.log(response)
-    //     setCart([])
-    //   })
-    //   .catch((error) => {
-    //     console.log('erro')
-    //   })
-    // }
-
     const placeOrder = () => {
       let order = []
       for(var i in cart) {
@@ -141,11 +120,12 @@ const CartPage = () => {
 
       axios(config)
       .then(function (response) {
-          console.log(response)
-    //    setCart([])
+        alert ('Pedido feito com sucesso')
+        setCart([])
+        goToHomePage(history)
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (response) {
+        alert ('Houve um erro ao realizar seu pedido')
       });
 
     }
@@ -178,7 +158,7 @@ const CartPage = () => {
           <Linha/>
 
           <Method>
-            <PaymentOption type='radio' value='cash' name='method' onChange={selectPaymentMethod}/>Dinheiro
+            <PaymentOption type='radio' value='money' name='method' onChange={selectPaymentMethod}/>Dinheiro
           </Method>
 
           <Method>
@@ -189,10 +169,11 @@ const CartPage = () => {
 
 
         <DivPadding $padding='0px 20px 20px 20px'>
-          <Confirm onClick={() => placeOrder()}>Confirmar</Confirm>
+          
+          <Confirm disabled={disabled} $opacity={disabled ? .5 : 1} onClick={disabled ? '' : () => placeOrder()}>Confirmar</Confirm>
+          
           <Spacing/>
         </DivPadding>
-      
 
 
       </Height>
