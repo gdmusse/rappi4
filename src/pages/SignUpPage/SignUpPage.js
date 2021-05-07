@@ -47,27 +47,26 @@ const SignUpPage = () => {
   const { setOpenAlert, setAlertMsg, setAlertSeverity } = useContext(
     GlobalStateContext
   );
-  const [form, onChange, clear] = useForm({
+  const [form, onChange, clear, setForm] = useForm({
+
     name: "",
     email: "",
     cpf: "",
     password: "",
   });
 
-  const {
-    setActualPage,
-    setBack
-  } = useContext(GlobalStateContext);
+  const { setActualPage, setBack } = useContext(GlobalStateContext);
 
   useEffect(() => {
     setActualPage("");
     setBack(true);
-  }, [])
+  }, []);
 
   const onSubmitForm = (event) => {
     event.preventDefault();
     signUp();
   };
+
   const signUp = () => {
     const axiosConfig = {
       headers: {
@@ -96,6 +95,18 @@ const SignUpPage = () => {
   };
   const handleMouseDownPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const formatCpf = (event) => {
+    let cpfInput = event.target.value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+
+    if (cpfInput.length > 14) {
+      return;
+    }
+
+    setForm({ ...form, cpf: cpfInput });
   };
 
   return (
@@ -131,14 +142,15 @@ const SignUpPage = () => {
           <TextField
             name={"cpf"}
             value={form.cpf}
-            onChange={onChange}
-            label={"CPF"}
+            onChange={formatCpf}
+            label={"Cpf"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
             required
-            type={"cpf"}
+            type={"text"}
           />
+
           <TextField
             name={"password"}
             value={form.password}
