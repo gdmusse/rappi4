@@ -17,6 +17,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Box from "@material-ui/core/Box";
 import GlobalStateContext from "../../global/GlobalStateContext";
+import AlertModified from "../../components/Alert";
+
 
 export const LogoImage = styled.img`
   width: 40vw;
@@ -42,27 +44,29 @@ export const InputsContainer = styled.div`
 
 const SignUpPage = () => {
   const history = useHistory();
-  const [form, onChange, clear] = useForm({
+  const { setOpenAlert, setAlertMsg, setAlertSeverity } = useContext(
+    GlobalStateContext
+  );
+  const [form, onChange, clear, setForm] = useForm({
+
     name: "",
     email: "",
     cpf: "",
     password: "",
   });
 
-  const {
-    setActualPage,
-    setBack
-  } = useContext(GlobalStateContext);
+  const { setActualPage, setBack } = useContext(GlobalStateContext);
 
   useEffect(() => {
     setActualPage("");
     setBack(true);
-  }, [])
+  }, []);
 
   const onSubmitForm = (event) => {
     event.preventDefault();
     signUp();
   };
+
   const signUp = () => {
     const axiosConfig = {
       headers: {
@@ -77,10 +81,13 @@ const SignUpPage = () => {
         goToAddressPage(history);
       })
       .catch((error) => {
-        console.log(error);
+        setAlertMsg(error.response.data.message);
+        setAlertSeverity("error");
+        setOpenAlert(true);
         clear();
       });
   };
+
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -88,6 +95,18 @@ const SignUpPage = () => {
   };
   const handleMouseDownPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const formatCpf = (event) => {
+    let cpfInput = event.target.value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+
+    if (cpfInput.length > 14) {
+      return;
+    }
+
+    setForm({ ...form, cpf: cpfInput });
   };
 
   return (
@@ -123,14 +142,15 @@ const SignUpPage = () => {
           <TextField
             name={"cpf"}
             value={form.cpf}
-            onChange={onChange}
-            label={"CPF"}
+            onChange={formatCpf}
+            label={"Cpf"}
             variant={"outlined"}
             fullWidth
             margin={"normal"}
             required
-            type={"cpf"}
+            type={"text"}
           />
+
           <TextField
             name={"password"}
             value={form.password}
@@ -168,6 +188,7 @@ const SignUpPage = () => {
           </Box>
         </form>
       </InputsContainer>
+      <AlertModified />
     </ScreenContainer>
   );
 };

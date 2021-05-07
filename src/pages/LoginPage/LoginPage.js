@@ -19,7 +19,7 @@ import logo from "../../assets/images/logo-future-eats-invert.svg";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Box from "@material-ui/core/Box";
-import Footer from "../../components/Footer";
+
 
 export const LogoImage = styled.img`
   width: 40vw;

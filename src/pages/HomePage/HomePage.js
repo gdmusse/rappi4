@@ -9,8 +9,8 @@ import { useHistory } from "react-router-dom";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import styled from "styled-components";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
-import Loader from "../../components/Loader"
-import StatusOrder from './StatusOrder'
+import Loader from "../../components/Loader";
+import StatusOrder from "./StatusOrder";
 
 const FullScreen = styled.div`
   width: 100%;
@@ -56,13 +56,12 @@ const HomePage = () => {
   } = useContext(GlobalStateContext);
 
   const [search, setSearch] = useInput("");
-  const [activeOrder, setActiveOrder] = useState([])
+  const [activeOrder, setActiveOrder] = useState();
 
   const history = useHistory();
 
   useEffect(() => {
     setActualPage("Rappi4");
-    // setCart([]);
     setBack(false);
     setLoading(true);
     axios
@@ -73,14 +72,13 @@ const HomePage = () => {
       })
       .then((res) => {
         setRestaurants(res.data.restaurants);
-      
       })
       .catch((err) => {
         console.log(err.message);
       })
-      .then(()=>{
+      .then(() => {
         setLoading(false);
-     });
+      });
   }, []);
 
   const restaurantsCategories = restaurants
@@ -90,13 +88,11 @@ const HomePage = () => {
     .filter((category, index, self) => {
       return self.indexOf(category) === index;
     })
-    .sort((a,b) => {
+    .sort((a, b) => {
       const nameA = a.toLowerCase();
       const nameB = b.toLowerCase();
       return nameA.localeCompare(nameB);
-    })
-    ;
-
+    });
   useEffect(() => {
     setCategories(restaurantsCategories);
   }, [restaurants]);
@@ -142,27 +138,21 @@ const HomePage = () => {
   }, [restaurantsCategories[0]]);
 
   useEffect(() => {
-    getActiveOrder()
+    getActiveOrder();
   }, []);
 
   const getActiveOrder = () => {
     axios
-    .get(`${BASE_URL}/active-order`, {
-      headers: {
-        auth: localStorage.getItem('token'),
-      },
-    })
-    .then((response) => {
-      setActiveOrder(response.data.order)
-    })
-    .catch((error) => {
-    });
+      .get(`${BASE_URL}/active-order`, {
+        headers: {
+          auth: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setActiveOrder(response.data.order);
+      })
+      .catch((error) => {});
   };
-
-/*   console.log("rc", restaurantsCategories);
-
-  console.log("categories", categories);
- */
 
   return (
     <FullScreen>
@@ -181,7 +171,7 @@ const HomePage = () => {
       <DivCategories>
         <CategoryCard />
       </DivCategories>
-      {loading ? <Loader/> : ""}
+      {loading ? <Loader /> : ""}
       {loading === false && filteredRestaurants.length !== 0 ? (
         <DivCards>{restaurantsCards}</DivCards>
       ) : (
@@ -192,8 +182,7 @@ const HomePage = () => {
       ) : (
         ""
       )}
-      {activeOrder != null ? <StatusOrder activeOrder={activeOrder}/> : ''}
-      
+      {activeOrder != null ? <StatusOrder activeOrder={activeOrder} /> : ""}
     </FullScreen>
   );
 };
