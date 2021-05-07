@@ -73,7 +73,7 @@ const SignUpPage = () => {
     setBack
   } = useContext(GlobalStateContext);
 
-  const { setActualPage, setBack } = useContext(GlobalStateContext);
+
 
 
   useEffect(() => {
