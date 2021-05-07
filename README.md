@@ -1,4 +1,4 @@
-### <p align="center">💻 Pokedex 14 💻</p>
+### <p align="center">💻 LabeFood 7 💻</p>
 
 <div align="center" margin-bottom="10px">
   <i>Frank de Castro Filho, Gabriel Musse, Kethreen Lanes Gonçalves, Maria Eduarda Auler, Milena Cacau De Carvalho </i>
