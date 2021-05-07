@@ -42,12 +42,11 @@ export default function CardRemove(props) {
 
       <Typography
         variant='body2'
-        textAlign='center'
         color='textSecondary'
-        component='p'
+        component='div'
       >
         <Box textAlign='center' m={1}>
-          { selectedItem.name}
+          {selectedItem.name}
         </Box>
       </Typography>
       <OrderImage src={selectedItem.photoUrl} />

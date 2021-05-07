@@ -25,6 +25,7 @@ export const StyledCard = styled(Card)`
 
 export const CardImgFood = styled.img`
   width: 100px;
+  object-fit: cover;
 `;
 
 export const InfoItemFood = styled.div`

@@ -12,7 +12,7 @@ import axios from 'axios'
 
 const EditAddressPage = () => {
     const history = useHistory();
-    const [form, onChange, clear, setForm] = useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""})
+    const [form, onChange, setForm] = useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""})
     useProtectedPage();
 
     const {

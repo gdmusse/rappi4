@@ -19,10 +19,12 @@ const GlobalState = (props) => {
   const [back, setBack] = useState(false);
   const [profile, setProfile] = useState({});
   const [orders, setOrders] = useState([]);
+  const [cardClearCart, setCardClearCart] = useState(false);
 
   const addItemToCart = (newItem) => {
     if(cart.length > 0) {
       if(newItem[1] == cart[0].idRestaurant) {
+      
         const index = cart.findIndex((i) => i.id === newItem[0].id);
         let newCart = [...cart];
         if (index === -1) {
@@ -33,22 +35,12 @@ const GlobalState = (props) => {
         
         setCart(newCart);
         alert(`${newItem[0].name} foi adicionado ao seu carrinho!`);
+     
       } else {
-        if(window.confirm('Você já tem itens adicionados no seu carrinho. Deseja limpar o carrinho?')){
-          setCart([])
-          const index = cart.findIndex((i) => i.id === newItem[0].id);
-          let newCart = [];
-          if (index === -1) {
-          newCart.push({ ...newItem[0], idRestaurant: newItem[1], quantity: Number(cartQuantity)});
-          } else {
-          newCart[index].quantity += Number(cartQuantity);
-          } 
-          setCart(newCart);
-          alert(`${newItem[0].name} foi adicionado ao seu carrinho!`);
-
-        } 
+        setCardClearCart(true)
       }
     } else {
+      setCardClearCart(false)
       const index = cart.findIndex((i) => i.id === newItem[0].id);
       let newCart = [...cart];
       if (index === -1) {
@@ -59,7 +51,9 @@ const GlobalState = (props) => {
       
       setCart(newCart);
       alert(`${newItem[0].name} foi adicionado ao seu carrinho!`);
+
     }
+   
   };
 
   const removeItemFromCart = (itemToRemove) => {
@@ -104,7 +98,9 @@ const GlobalState = (props) => {
         profile,
         setProfile,
         orders,
-        setOrders
+        setOrders,
+        cardClearCart, 
+        setCardClearCart,
       }}
     >
       {props.children}
@@ -113,3 +109,4 @@ const GlobalState = (props) => {
 };
 
 export default GlobalState;
+

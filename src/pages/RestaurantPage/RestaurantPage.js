@@ -9,6 +9,7 @@ import GlobalStateContext from "../../global/GlobalStateContext";
 import CardSelector from "./SelectProductTocard";
 import { Container, MainTitleBar } from "./styled";
 import CardRemove from "./RemoveProducts";
+import ClearCart from "./clearcart";
 
 const RestaurantPage = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
@@ -16,9 +17,8 @@ const RestaurantPage = (props) => {
   const [categoryGroups, setCategoryGroups] = useState([]);
 
   const params = useParams();
-  const history = useHistory();
 
-  const { selectcart, selectedItemRemove, setActualPage, setBack } = useContext(
+  const { selectcart, selectedItemRemove, setActualPage, setBack, cardClearCart } = useContext(
     GlobalStateContext
   );
 
@@ -43,7 +43,7 @@ const RestaurantPage = (props) => {
         setRestaurantDetails(response.data.restaurant);
       })
       .catch((error) => {
-        alert(error.response.data);
+        alert(error.message);
       });
   };
 
@@ -52,7 +52,7 @@ const RestaurantPage = (props) => {
       <CardSelector></CardSelector>
     ) : selectedItemRemove ? (
       <CardRemove></CardRemove>
-    ) : null;
+    ) : cardClearCart ? ( <ClearCart></ClearCart> ): null;
   };
 
   useEffect(() => {
@@ -78,6 +78,7 @@ const RestaurantPage = (props) => {
       {showPage()}
       <Container>
         <RestaurantCardDetails
+        key={restaurantDetails.name}
           logoUrl={restaurantDetails.logoUrl}
           name={restaurantDetails.name}
           deliveryTime={restaurantDetails.deliveryTime}
@@ -88,8 +89,8 @@ const RestaurantPage = (props) => {
 
         {categoryGroups &&
           Object.entries(categoryGroups).map(([categoryName, items]) => (
-            <div>
-              <MainTitleBar>{categoryName}</MainTitleBar>
+            <div key={categoryName}>
+              <MainTitleBar >{categoryName}</MainTitleBar>
               {items.map((item) => (
                 <ProductCard
                   category={item.category}

@@ -66,10 +66,11 @@ export default function CardSelector(props) {
         component='p'
       >
         <Box textAlign='center' m={1}>
-          {selectedItem.name}
+        { selectedItem.name && selectedItem.name}
         </Box>
       </Typography>
       <OrderImage src={selectedItem.photoUrl} />
+
 
       <br />
       <form>
@@ -106,3 +107,4 @@ export default function CardSelector(props) {
     </Card>
   );
 }
+
