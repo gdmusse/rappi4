@@ -60,7 +60,7 @@ const HomePage = () => {
 
   useEffect(() => {
     setActualPage("Rappi4");
-    setCart([]);
+    // setCart([]);
     setBack(false);
     setLoading(true);
     axios

@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import GlobalStateContext from "../../../global/GlobalStateContext";
 import { Typography } from "@material-ui/core"
 import classNames from 'classnames'
 import {
   DivPadding,
   BoxPrices,
-  ShippingPrice,
+  DivSubtotal,
+  DivTotal
 } from '../styled'
 import {
   mainGray,
@@ -40,30 +42,55 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Total = () => {
+const Total = (props) => {
     const classes = useStyles()
 
-    // className={classNames(classes.mainGray, classes.primaryColor)} 
+    const {
+      cart
+    } = useContext(GlobalStateContext);
+
+    var subTotal = 0
+    var total = 0
+
+    if(cart.length > 0) {
+      for( var product in cart) {
+        subTotal = subTotal + (parseFloat(cart[product].price)*cart[product].quantity)
+      } 
+      total = subTotal + props.shipping
+    }
+
     return (
 
     <DivPadding $padding='0px 20px 20px 20px'> 
             <BoxPrices>
-            <Typography className={classNames(classes.blackColor, classes.font18)}  
-                    component='p'
-                  > SUBTOTAL
-                </Typography>
-              
-              <ShippingPrice>
+            
+              <DivSubtotal>
                 <Typography className={classNames(classes.blackColor, classes.font16)}  
                     component='p'
-                  > Frete R$6,00
+                  > Subtotal R${subTotal}
+                </Typography>
+              
+              
+                <Typography className={classNames(classes.blackColor, classes.font16)}  
+                    component='p'
+                  > Frete R${props.shipping ? props.shipping : '0'}
+                </Typography>
+              </DivSubtotal>
+
+              <DivTotal> 
+                <Typography className={classNames(classes.primaryColor, classes.font18, classes.bold)}  
+                    component='p'
+                  > Total
                 </Typography>
 
                 <Typography className={classNames(classes.primaryColor, classes.font18, classes.bold)}  
                     component='p'
-                  > R$67,00
+                  > R${total}
                 </Typography>
-              </ShippingPrice>
+
+              </DivTotal>
+                
+  
             </BoxPrices>
           </DivPadding>
     )

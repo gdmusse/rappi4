@@ -39,25 +39,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RestaurantDetails = () => {
-    const classes = useStyles();
+const RestaurantDetails = (props) => {
+    const classes = useStyles()
     
     return (
 
-    <DivPadding>
+      <DivPadding>
         <Typography className={classNames(classes.primaryColor, classes.font16)}  
             component='p'
-        > Bullguer Vila Madalena
+        > {props.details.name}
         </Typography>
         <Typography className={classNames(classes.mainGray, classes.font16)}  
             component='p'
-        > R. Fradique Coutinho, 1136 - Vila Madalena
+        > {props.details.address}
         </Typography>
         <Typography className={classNames(classes.mainGray, classes.font16)}  
             component='p'
-        > 30 - 45 min
+        > {props.details.deliveryTime}
         </Typography>
-    </DivPadding>
+      </DivPadding>
     )
 }
 

@@ -54,7 +54,7 @@ const ProductCart = (props) => {
           <BoxQuantity>
             <Typography className={classes.primaryColor}  
               component='p'
-            > 1
+            > {props.product.quantity}
             </Typography>
           </BoxQuantity>
           

@@ -1,5 +1,7 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, {useEffect, useState} from "react"
+import axios from 'axios'
+import { makeStyles } from "@material-ui/core/styles"
+import BASE_URL from "../../../constants/urls";
 import {
   mainGray,
   primaryColor,
@@ -41,6 +43,26 @@ const useStyles = makeStyles((theme) => ({
 
 const AddressBox = () => {
     const classes = useStyles();
+
+    const [fullAddress, setFullAddress] = useState([]);
+
+    useEffect(() => {
+      getFullAddress()
+    }, []);
+
+    const getFullAddress = () => {
+    axios
+      .get(`${BASE_URL}/profile/address`, {
+        headers: {
+          auth: localStorage.getItem('token'),
+        }
+      })
+      .then((response) => {
+        setFullAddress(response.data.address)
+      })
+      .catch((error) =>  {      
+      })
+    }
     
     return (
         <DivAddress>
@@ -52,7 +74,7 @@ const AddressBox = () => {
               
               <Typography className={classes.font16}
                   component='p'
-                > Rua Alessandra Vieira, 42
+                > {fullAddress.street}, {fullAddress.number} - {fullAddress.neighbourhood}
               </Typography>
             </DivPadding>
         </DivAddress>

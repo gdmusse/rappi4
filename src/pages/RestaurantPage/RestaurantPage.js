@@ -100,6 +100,7 @@ const RestaurantPage = (props) => {
                   Photo={item.photoUrl}
                   description={item.description}
                   price={item.price.toFixed(2)}
+                  idRestaurant={params.id}
                 />
               ))}
             </div>

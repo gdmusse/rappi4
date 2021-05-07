@@ -23,6 +23,12 @@ export const DivPadding = styled.div`
   padding: ${(props) => props.$padding || '20px'};
 ` 
 
+export const EmptyMap = styled.div` 
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 30px;
+` 
+
 export const BoxProduct = styled.div` 
   width: 100%;
   height: 18vh;
@@ -80,10 +86,18 @@ export const BoxPrices = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  flex-flow: column;
 ` 
 
-export const ShippingPrice = styled.div` 
+export const DivSubtotal = styled.div` 
   text-align: end;
+`
+
+export const DivTotal = styled.div` 
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10px;
 `
 
 export const Linha = styled.hr` 
