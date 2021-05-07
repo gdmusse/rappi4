@@ -52,16 +52,16 @@ const Payment = () => {
         <DivPadding $padding='0px 20px 20px 20px'> 
         <Typography className={classNames(classes.blackColor, classes.font16)}  
           component='p'
-              > Payment method
+              > Forma de pagamento
         </Typography>
         <Linha/>
 
         <Method>
-          <PaymentOption type='radio' value='Cash' name='method' />Cash
+          <PaymentOption type='radio' value='Cash' name='method' />Dinheiro
         </Method>
 
         <Method>
-          <PaymentOption type='radio' value='Credit' name='method' />Credit card
+          <PaymentOption type='radio' value='Credit' name='method' />Cartão de crédito
         </Method>
 
       </DivPadding>

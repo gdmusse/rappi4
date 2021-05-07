@@ -49,13 +49,17 @@ const useStyles = makeStyles((theme) => ({
 
 const CartPage = () => {
     const classes = useStyles();
+
     const {
       setActualPage,
+      cart
     } = useContext(GlobalStateContext);
 
     useEffect(() => {
       setActualPage('Meu carrinho')
     }, []);
+
+    console.log(cart)
 
     return (
 
@@ -64,16 +68,21 @@ const CartPage = () => {
           <AddressBox/>
 
           <RestaurantDetails/>
-
-          <ProductCart/> 
+        
+          {cart.length > 0 ?
+            cart.map (product => (
+              <ProductCart product={product}/> 
+            )) : 'Carrinho vazio'
+          }
             
           <Total/> 
 
           <Payment/>
         </div>
       
+
       <DivPadding $padding='0px 20px 20px 20px'>
-        <Confirm>Confirm</Confirm>
+        <Confirm>Confirmar</Confirm>
         <Spacing/>
       </DivPadding>
 

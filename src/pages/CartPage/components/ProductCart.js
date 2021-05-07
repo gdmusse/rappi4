@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext } from "react";
+import GlobalStateContext from "../../../global/GlobalStateContext";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   mainGray,
@@ -39,9 +40,12 @@ import {
   }));
 
 
-const ProductCart = () => {
+const ProductCart = (props) => {
   const classes = useStyles();
 
+  const {
+    removeItemFromCart
+  } = useContext(GlobalStateContext);
 
     return (
         <DivPadding $padding='0px 20px 20px 20px'>
@@ -55,27 +59,27 @@ const ProductCart = () => {
           </BoxQuantity>
           
         
-          <ProductImg src={'https://www.baressp.com.br/bares/fotos2/mc_donalds_5-min_120220191550.jpg'}/>
+          <ProductImg src={props.product.photoUrl}/>
 
           <DivPadding $padding='20px 20px 20px 20px'> 
             <BoxInfos>
                 <Typography className={classNames(classes.primaryColor, classes.font16)}   
                   component='p'
-                > Stencil
+                > {props.product.name}
                 </Typography>
 
                 <Typography className={classNames(classes.mainGray, classes.font14)}   
                   component='p'
-                > Loren Ipsun Loren Ipsun
+                > {props.product.description}
                 </Typography>
 
                 <Typography className={classNames(classes.blackColor, classes.font16)}   
                   component='p'
-                > Stencil
+                > R${props.product.price}
                 </Typography>
             </BoxInfos>
           </DivPadding>
-          <RemoveButton>Remove</RemoveButton>
+          <RemoveButton onClick={() => removeItemFromCart(props.product)}>Remover</RemoveButton>
         </BoxProduct>
 
       </DivPadding>
