@@ -34,7 +34,7 @@ function ProductCard(props) {
   const itensFromCart = (newItem) => {
     const index = cart && cart.findIndex((i) => i.id === newItem);
     let newCart = [...cart];
-    if (index != -1) {
+    if (index !== -1) {
       return <NumberProductsCart>{newCart[index].quantity}</NumberProductsCart>;
     } else {
       return <div></div>;
@@ -43,8 +43,7 @@ function ProductCard(props) {
 
   const buttonAddOrRemove = (newItem) => {
     const index = cart && cart.findIndex((i) => i.id === newItem);
-    let newCart = [...cart];
-    if (index != -1) {
+    if (index !== -1) {
       return <ButtonRemove onClick={selectRemove}>{"remover"}</ButtonRemove>;
     } else {
       return <ButtonAdd onClick={selectItemToCart}>{"adicionar"}</ButtonAdd>;

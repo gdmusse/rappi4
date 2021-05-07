@@ -12,7 +12,7 @@ import axios from "axios";
 
 const EditProfilePage = () => {
   const history = useHistory();
-  const [form, onChange, clear, setForm] = useForm({
+  const [form, onChange, setForm] = useForm({
     name: "",
     email: "",
     cpf: "",
@@ -20,11 +20,6 @@ const EditProfilePage = () => {
   useProtectedPage();
 
   const {
-    setAlertMsg,
-    setAlertSeverity,
-    setOpenAlert,
-    profile,
-    setProfile,
     setActualPage,
     setBack,
   } = useContext(GlobalStateContext);

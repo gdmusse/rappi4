@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const history = useHistory();
   const classes = useStyles();
+  
   const { actualPage, back } = useContext(GlobalStateContext);
 
 
@@ -56,7 +57,6 @@ const Header = () => {
             <IconButton
               edge="start"
               className={classes.menuButton}
-              color="paper"
               aria-label="menu"
               onClick={() => goToPreviousPage(history)}
             >
